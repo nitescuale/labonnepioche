@@ -10,17 +10,21 @@
         <link rel="stylesheet" type="text/css" href="accueil.css">
 
         <header> <!-- Entete -->
-            <a href="accueil.php"><img   src="La_Bonne_Pioche_2_-removebg-preview.png" alt="Logo de mon site web" ></a> <!-- Ajout du logo, qui renvoie à l'accueil si cliqué -->
-            <a id="poster_annonce" href="/labonnepioche/poster_annonce.php">
-            <button>Je souhaite publier une annonce</button>
-            </a>            
-            <div class="menu-dropdown">
-                <img id="dropdown-icon" src="user_icon_png_transparent_15_removebg_preview.png" alt="Icône utilisateur">
-                <div class="dropdown-content" id="dropdown-content">
-                    <a href="profil.php">Mon profil</a>
-                    <a href="favoris.php">Mes favoris</a>
-                    <a href="annonces.php">Mes annonces</a>
-                    <a href="transactions.php">Mes transactions</a>
+            <a href="accueil.php"><img   src="La_Bonne_Pioche_2_-removebg-preview.png" alt="Logo de mon site web" ></a> <!-- Ajout du logo, qui renvoie à l'accueil si cliqué -->         
+            <div class="search-bar">
+                <input type="text" placeholder="Rechercher...">
+                <button type="submit">Rechercher</button>
+            </div>
+            <div class="header-buttons">
+                <a href="poster_annonce.php" class="publish-button">Publier une annonce</a>
+                <div class="menu-dropdown">
+                    <img id="dropdown-icon" src="user_icon_png_transparent_15_removebg_preview.png" alt="Icône utilisateur">
+                    <ul class="dropdown-content" id="dropdown-content">
+                        <li><a href="profil.php">Mon profil</a></li>
+                        <li><a href="favoris.php">Mes favoris</a></li>
+                        <li><a href="annonces.php">Mes annonces</a></li>
+                        <li><a href="transactions.php">Mes transactions</a></li>
+                    </ul>
                 </div>
             </div>
         </header>
