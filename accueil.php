@@ -10,22 +10,44 @@
         <link rel="stylesheet" type="text/css" href="accueil.css">
 
         <header> <!-- Entete -->
-            <a href="accueil.php"><img   src="La_Bonne_Pioche_2_-removebg-preview.png" alt="Logo de mon site web" ></a> <!-- Ajout du logo, qui renvoie à l'accueil si cliqué -->         
+            <a href="accueil.php"><img   src="logo_site.png" alt="Logo de mon site web" ></a> <!-- Ajout du logo, qui renvoie à l'accueil si cliqué -->         
             <div class="search-bar">
                 <input type="text" placeholder="Rechercher...">
                 <button type="submit">Rechercher</button>
             </div>
             <div class="header-buttons">
                 <a href="poster_annonce.php" class="publish-button">Publier une annonce</a>
-                <div class="menu-dropdown">
-                    <img id="dropdown-icon" src="user_icon_png_transparent_15_removebg_preview.png" alt="Icône utilisateur">
-                    <ul class="dropdown-content" id="dropdown-content">
-                        <li><a href="profil.php">Mon profil</a></li>
-                        <li><a href="favoris.php">Mes favoris</a></li>
-                        <li><a href="annonces.php">Mes annonces</a></li>
-                        <li><a href="transactions.php">Mes transactions</a></li>
-                    </ul>
-                </div>
+                <?php
+                session_start();
+
+                // Fonction pour récupérer l'URL de la photo de profil de l'utilisateur depuis la base de données
+                function getUserProfilePictureURL($user_id) {
+                    // Code pour récupérer l'URL de la photo de profil de l'utilisateur depuis la base de données
+                    // Retourne l'URL de la photo de profil
+                }
+
+                // Vérifie si l'utilisateur est connecté
+                if (isset($_SESSION['user_id'])) {
+                    // Afficher l'icône de l'utilisateur connecté
+                    $user_id = $_SESSION['user_id'];
+                    $profile_picture_url = getUserProfilePictureURL($user_id);
+                    echo "<a href='profil.php' class='pfp_login' ><img src='$profile_picture_url' alt='Photo de profil' style='width: 50%; height: 50%;'></a>";
+
+                    // Afficher le menu défilant
+                    echo "<div class='menu-dropdown'>";
+                    echo "<img id='dropdown-icon' src='user_icon_png_transparent_15_removebg_preview.png' alt='Icône utilisateur'>";
+                    echo "<ul class='dropdown-content' id='dropdown-content'>";
+                    echo "<li><a href='profil.php'>Mon profil</a></li>";
+                    echo "<li><a href='favoris.php'>Mes favoris</a></li>";
+                    echo "<li><a href='annonces.php'>Mes annonces</a></li>";
+                    echo "<li><a href='transactions.php'>Mes transactions</a></li>";
+                    echo "</ul>";
+                    echo "</div>";
+                } else {
+                    // Afficher l'icône de connexion/inscription par défaut
+                    echo "<a href='login.php' class='pfp_login'><img src='login_icon.png' alt='Connexion/Inscription' style='width: 100px; height: 100px; margin-left:-50%; margin-top:25%;'></a>";
+                }
+                ?>
             </div>
         </header>
 

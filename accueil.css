@@ -21,6 +21,14 @@ header a, header img{
     height: 180px;
 }
 
+header a.pfp_login img{
+  position :auto;
+  margin-right: auto;
+  padding-left: 30px;
+  width: auto;
+  height: 10px;
+}
+
 .menu-dropdown {
     position: relative;
     display: inline-block;
@@ -80,7 +88,7 @@ header a, header img{
   transition: background-color 0.3s ease;
   font-family: "Helvetica Neue", Helvetica; /* Utilise la police Helvetica sans serif */
   font-size: 14px; /* Taille de police légèrement plus petite */
-  margin-left:-10%;
+  margin-left:-13%;
   margin-top: 5%;
   height: auto;
 }
