@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `annonces`;
 CREATE TABLE IF NOT EXISTS `annonces` (
-  `id_annonce` bigint NOT NULL,
+  `id_annonce` bigint NOT NULL AUTO_INCREMENT,
   `id_utilisateur` bigint NOT NULL,
   `titre` text NOT NULL,
   `description` text NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `annonces` (
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
-  `id_categorie` int NOT NULL,
+  `id_categorie` int NOT NULL AUTO_INCREMENT,
   `nom_categorie` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id_categorie`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 
 DROP TABLE IF EXISTS `etats_produit`;
 CREATE TABLE IF NOT EXISTS `etats_produit` (
-  `id_etat` int NOT NULL,
+  `id_etat` int NOT NULL AUTO_INCREMENT,
   `nom_etat` text NOT NULL,
   PRIMARY KEY (`id_etat`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `etats_produit` (
 
 DROP TABLE IF EXISTS `favoris`;
 CREATE TABLE IF NOT EXISTS `favoris` (
-  `id_favori` int NOT NULL,
+  `id_favori` int NOT NULL AUTO_INCREMENT,
   `id_annonce` bigint NOT NULL,
   `id_utilisateur` bigint NOT NULL,
   PRIMARY KEY (`id_favori`),
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `favoris` (
 
 DROP TABLE IF EXISTS `photos_annonces`;
 CREATE TABLE IF NOT EXISTS `photos_annonces` (
-  `id_photo` bigint NOT NULL,
+  `id_photo` bigint NOT NULL AUTO_INCREMENT,
   `id_annonce` bigint NOT NULL,
   `url_photo` text NOT NULL,
   PRIMARY KEY (`id_photo`),
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `photos_annonces` (
 
 DROP TABLE IF EXISTS `reviews`;
 CREATE TABLE IF NOT EXISTS `reviews` (
-  `id_review` bigint NOT NULL,
+  `id_review` bigint NOT NULL AUTO_INCREMENT,
   `id_annonce` bigint NOT NULL,
   `id_utilisateur` bigint NOT NULL,
   `note` int NOT NULL,
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `reviews` (
 
 DROP TABLE IF EXISTS `transactions`;
 CREATE TABLE IF NOT EXISTS `transactions` (
-  `id_transaction` bigint NOT NULL,
+  `id_transaction` bigint NOT NULL AUTO_INCREMENT,
   `id_annonce` bigint NOT NULL,
   `id_vendeur` bigint NOT NULL,
   `id_acheteur` bigint NOT NULL,
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
 
 DROP TABLE IF EXISTS `utilisateurs`;
 CREATE TABLE IF NOT EXISTS `utilisateurs` (
-  `id_utilisateur` bigint NOT NULL,
+  `id_utilisateur` bigint NOT NULL AUTO_INCREMENT,
   `nom` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `prenom` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `email` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
