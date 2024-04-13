@@ -19,6 +19,14 @@
 
                     switch($err)
                     {
+                        case 'signup_success':
+                        ?>
+                            <div class="alert alert-info">
+                                <strong>Compte créé avec succès !</strong> <br> Veuillez vous connecter
+                            </div>
+                        <?php
+                        break;
+
                         case 'password':
                         ?>
                             <div class="alert alert-danger">
@@ -46,7 +54,7 @@
                 }
                 ?> 
             
-            <form action="connexion.php" method="post">         <!-- On associe le processus connexion.php au formulaire, qui recevra les données de manière POST-->
+            <form action="login_process.php" method="post">         <!-- On associe le processus connexion.php au formulaire, qui recevra les données de manière POST-->
                 <h2 class="text-center">Connexion</h2>       
                 <div class="form-group">
                     <input type="email" name="email" class="form-control" placeholder="Email" required="required" autocomplete="off">       <!-- Entrée du mail-->

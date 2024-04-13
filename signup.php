@@ -23,7 +23,7 @@
                             <div class="alert alert-success">
                                 <strong>Succès</strong> Inscription réussie !
                             </div>
-                            <?php header ('Location: login.php')?>
+                            <?php header ('Location: login.php?login_err=signup_success')?>
                         <?php
                         break;
 
