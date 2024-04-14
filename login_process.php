@@ -16,7 +16,7 @@
         $data = $check->fetch();
         $row = $check->rowCount();
         
-        // Vérifications puis connexion sur la page Jeune + session adéquate
+        // Vérifications puis connexion sur la page d'accueil + session adéquate
         // Si > à 0 alors l'utilisateur existe
         if($row > 0)
         {
@@ -26,9 +26,9 @@
                 // Si le mot de passe est le bon
                 if($hash_password = $data['password'])
                 {
-                    // On crée la session et on redirige àl'accueil.php
+                    // On crée la session et on redirige à l'accueil.php
                     $_SESSION['user'] = $data['token'];
-                    $_SESSION['id'] = $data['id'];
+                    $_SESSION['id'] = $data['id_utilisateur'];
                     header('Location: accueil.php');
                     die();
                 }else{ header('Location: login.php?login_err=password'); die(); }       // Divers codes d'erreur à afficher pour chaque cas sur la page index.php

@@ -82,6 +82,12 @@
                 <div class="form-group">
                     <input type="text" name="prenom" class="form-control" placeholder="Prenom" required="required" autocomplete="off">
                 </div>
+                
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Photo de profil</label>
+                    <input type="file" class="form-control-file" id="pfp" name = "pfp">
+                </div>
+
                 <div class="form-group">
                     <input type="email" name="email" class="form-control" placeholder="Email" required="required" autocomplete="off">
                 </div>

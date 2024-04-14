@@ -12,6 +12,12 @@
         $password = htmlspecialchars($_POST['password']);
         $password_retype = htmlspecialchars($_POST['password_retype']);
 
+        if(empty($_POST['url_photo_profil'])){
+            $url_photo_profil = 'http://localhost/labonnepioche/user_icon.png';
+        }else{
+            $url_photo_profil = htmlspecialchars($_POST['url_photo_profil']);
+        };
+
         // On vérifie si l'utilisateur existe
         $check = $bdd->prepare('SELECT nom, prenom, email, password FROM utilisateurs WHERE email = ?');
         $check->execute(array($email));
@@ -32,19 +38,21 @@
                                 $hash_password = hash('sha256', $password.$email);
 
 
-                                // On stock l'adresse IP
+                                // On stock l'adresse IP, on créé le token et on enregistre la dated'inscription
                                 $ip = $_SERVER['REMOTE_ADDR'];
                                 $date_inscription = date('Y-m-d', $_SERVER['REQUEST_TIME']);
+                                $token = bin2hex(openssl_random_pseudo_bytes(64));
                                 
                                 // On insère le tout dans la base de données
-                                $insert = $bdd->prepare('INSERT INTO utilisateurs(nom, prenom, email, password, ip, token, date_inscription) VALUES(:nom, :prenom, :email, :password, :ip, :token, :date_inscription)');
+                                $insert = $bdd->prepare('INSERT INTO utilisateurs(nom, prenom, email, password, ip, token, url_photo_profil, date_inscription) VALUES(:nom, :prenom, :email, :password, :ip, :token, :url_photo_profil, :date_inscription)');
                                 $insert->execute(array(
                                     'nom' => $nom,
                                     'prenom'=>$prenom,
                                     'email' => $email,
                                     'password' => $hash_password,
                                     'ip' => $ip,
-                                    'token' => bin2hex(openssl_random_pseudo_bytes(64)),
+                                    'token' => $token,
+                                    'url_photo_profil' => $url_photo_profil,
                                     'date_inscription' => $date_inscription
                                 ));
                                 // On redirige avec le message de succès

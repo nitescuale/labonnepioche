@@ -1,4 +1,8 @@
 <!DOCTYPE html> 
+<?php 
+    session_start();            // Démarrage de la session 
+    require_once 'db_config.php';  // Connexion à la bdd
+?>
 
 <html>
     <head>
@@ -18,29 +22,27 @@
             <div class="header-buttons">
                 <a href="poster_annonce.php" class="publish-button">Publier une annonce</a>
                 <?php
-                session_start();
-
-                // Fonction pour récupérer l'URL de la photo de profil de l'utilisateur depuis la base de données
-                function getUserProfilePictureURL($user_id) {
-                    // Code pour récupérer l'URL de la photo de profil de l'utilisateur depuis la base de données
-                    // Retourne l'URL de la photo de profil
-                }
 
                 // Vérifie si l'utilisateur est connecté
-                if (isset($_SESSION['user_id'])) {
-                    // Afficher l'icône de l'utilisateur connecté
-                    $user_id = $_SESSION['user_id'];
-                    $profile_picture_url = getUserProfilePictureURL($user_id);
-                    echo "<a href='profil.php' class='pfp_login' ><img src='$profile_picture_url' alt='Photo de profil' style='width: 50%; height: 50%;'></a>";
+                if (isset($_SESSION['user'])) {
 
+                    // On récupère les données et l'URL de la photo de profil de l'utilisateur depuis la base de données
+                    $check = $bdd->prepare('SELECT nom, prenom, email, password, token, id_utilisateur, url_photo_profil FROM utilisateurs WHERE token = ?');
+                    $check->execute(array($_SESSION['user']));
+                    $data = $check->fetch();
+
+                    // Afficher l'icône de l'utilisateur connecté
+                    $user = $_SESSION['user'];
+                    $url_photo_profil = $data['url_photo_profil'];
                     // Afficher le menu défilant
                     echo "<div class='menu-dropdown'>";
-                    echo "<img id='dropdown-icon' src='user_icon_png_transparent_15_removebg_preview.png' alt='Icône utilisateur'>";
+                    echo "<img id='dropdown-icon' src='$url_photo_profil' alt='Icône utilisateur'>";
                     echo "<ul class='dropdown-content' id='dropdown-content'>";
                     echo "<li><a href='profil.php'>Mon profil</a></li>";
                     echo "<li><a href='favoris.php'>Mes favoris</a></li>";
                     echo "<li><a href='annonces.php'>Mes annonces</a></li>";
                     echo "<li><a href='transactions.php'>Mes transactions</a></li>";
+                    echo "<li><a href='logoff.php'>Se déconnecter</a></li>";
                     echo "</ul>";
                     echo "</div>";
                 } else {
