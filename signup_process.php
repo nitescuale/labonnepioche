@@ -61,7 +61,7 @@
                                 // On stock l'adresse IP, on créé le token et on enregistre la dated'inscription
                                 $ip = $_SERVER['REMOTE_ADDR'];
                                 $date_inscription = date('Y-m-d', $_SERVER['REQUEST_TIME']);
-                                $token = bin2hex(openssl_random_pseudo_bytes(64));
+                                $token = uniqid();
                                 
                                 // On insère le tout dans la base de données
                                 $insert = $bdd->prepare('INSERT INTO utilisateurs(nom, prenom, email, password, ip, token, url_photo_profil, date_inscription) VALUES(:nom, :prenom, :email, :password, :ip, :token, :url_photo_profil, :date_inscription)');

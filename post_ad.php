@@ -55,7 +55,11 @@
                         ?>
                     </select>
                 </div>
-                
+                <div class="form-group">
+                    <label>Images :</label>
+                    <br> <sup>(Vous pouvez en sélectionner plusieurs) </sup>
+                    <input type="file" name="images[]" id="images" multiple>                
+                </div>
                 <div class="form-group">
                     <label>Description :</label>
                     <textarea class="form-control" id="description" rows="3"></textarea>
@@ -70,6 +74,8 @@
             </form>
             <p class="text-center"><a href="post_ad_process.php"> Publier mon annonce </a></p>       <!-- Option de s'incrire, renvoyant à signup.php, page d'inscription -->
         </div>
+
+
 
         <style>                     /* Style CSS de la page, assez court pour ne pas prendre la peine de faire un .css externe */
             .login-form {
