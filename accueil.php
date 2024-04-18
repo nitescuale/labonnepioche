@@ -20,7 +20,7 @@
                 <button type="submit">Rechercher</button>
             </div>
             <div class="header-buttons">
-                <a href="poster_annonce.php" class="publish-button">Publier une annonce</a>
+                <a href="post_ad.php" class="publish-button">Publier une annonce</a>
                 <?php
 
                 // Vérifie si l'utilisateur est connecté

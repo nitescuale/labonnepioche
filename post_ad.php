@@ -68,7 +68,7 @@
                     <button type="submit" class="btn btn-primary btn-block">Publier</button>      <!-- Bouton d'envoi/de submit du formulaire afin de se connecter -->
                 </div>   
             </form>
-            <p class="text-center"><a href="signup.php"> Pas de compte ? Inscription</a></p>       <!-- Option de s'incrire, renvoyant à signup.php, page d'inscription -->
+            <p class="text-center"><a href="post_ad_process.php"> Publier mon annonce </a></p>       <!-- Option de s'incrire, renvoyant à signup.php, page d'inscription -->
         </div>
 
         <style>                     /* Style CSS de la page, assez court pour ne pas prendre la peine de faire un .css externe */
