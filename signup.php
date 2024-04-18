@@ -74,7 +74,7 @@
                 }
                 ?>
             
-            <form action="signup_process.php" method="post"> <!-- On associe le processus inscription_traitement.php au formulaire, qui recevra les données de manière POST-->
+            <form action="signup_process.php" method="post" enctype="multipart/form-data"> <!-- On associe le processus inscription_traitement.php au formulaire, qui recevra les données de manière POST-->
                 <h2 class="text-center">Inscription</h2>             <!-- Diverses entrées, de plusieurs types -->
                 <div class="form-group">
                     <input type="text" name="nom" class="form-control" placeholder="Nom" required="required" autocomplete="off">
@@ -82,10 +82,10 @@
                 <div class="form-group">
                     <input type="text" name="prenom" class="form-control" placeholder="Prenom" required="required" autocomplete="off">
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="exampleFormControlFile1">Photo de profil</label>
-                    <input type="file" class="form-control-file" id="pfp" name = "pfp">
+                    <label>Photo de profil</label>
+                    <input type="file" class="form-control-file" id="photo_profil" name = "photo_profil">
                 </div>
 
                 <div class="form-group">

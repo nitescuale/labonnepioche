@@ -12,10 +12,30 @@
         $password = htmlspecialchars($_POST['password']);
         $password_retype = htmlspecialchars($_POST['password_retype']);
 
-        if(empty($_POST['url_photo_profil'])){
-            $url_photo_profil = 'http://localhost/labonnepioche/user_icon.png';
+
+        
+        if(empty($_FILES['photo_profil'])){
+            $url_photo_profil = 'http://localhost/labonnepioche/pfps/user_icon.png';
         }else{
-            $url_photo_profil = htmlspecialchars($_POST['url_photo_profil']);
+            // Chemin où vous souhaitez stocker les images téléchargées
+            $targetDir = "./pfps/";
+
+            // Chemin complet du fichier téléchargé
+            $targetFile = $targetDir . basename($_FILES["photo_profil"]["name"]);
+
+            // Vérifie si le fichier est une image réelle ou une fausse image
+            $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
+            $fileName = $_FILES["photo_profil"]["name"];
+            $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+
+            if (in_array(strtolower($fileExtension), $allowedExtensions)) {
+                // Le fichier est une image valide, procédez au téléchargement
+                if (move_uploaded_file($_FILES["photo_profil"]["tmp_name"], $targetFile)) {
+                    $url_photo_profil = 'http://localhost/labonnepioche/pfps/' . basename($_FILES["photo_profil"]["name"]);
+                }
+            } else {
+                $url_photo_profil = 'http://localhost/labonnepioche/pfps/user_icon.png';
+            }
         };
 
         // On vérifie si l'utilisateur existe
