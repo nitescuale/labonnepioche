@@ -69,10 +69,9 @@
                     <input type="number" id="prix" class="form-control" placeholder="En euros"/>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">Publier</button>      <!-- Bouton d'envoi/de submit du formulaire afin de se connecter -->
+                    <button type="submit" class="btn btn-primary btn-block">Publier mon annonce</button>      <!-- Bouton d'envoi/de submit du formulaire afin de se connecter -->
                 </div>   
             </form>
-            <p class="text-center"><a href="post_ad_process.php"> Publier mon annonce </a></p>       <!-- Option de s'incrire, renvoyant à signup.php, page d'inscription -->
         </div>
 
 
