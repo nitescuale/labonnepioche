@@ -2,15 +2,10 @@
     session_start();            // Démarrage de la session 
     require_once 'db_config.php';  // Connexion à la bdd
 
-    echo("Erreur 1");
-
 // On vérifie que les variables existent et qu'elles ne sont pas vides
 if(!empty($_POST['titre']) && !empty($_POST['categorie']) && !empty($_POST['etat']) && isset($_FILES["images"]["error"]) && !empty($_POST['description']) && !empty($_POST['prix']))
     {
     // Patch XSS, pour éviter une entrée de code à partir des inputs de la page de connexion (injections SQL). On élimine ici les charactères spéciaux ('=&#039 par exemple)
-
-    echo("Erreur 2");
-
     $titre = htmlspecialchars($_POST['titre']);
     $categorie = htmlspecialchars($_POST['categorie']);
     $etat = htmlspecialchars($_POST['etat']);
@@ -24,20 +19,14 @@ if(!empty($_POST['titre']) && !empty($_POST['categorie']) && !empty($_POST['etat
         header('Location: login.php'); die();
     }
 
-    echo("Erreur 3");
-
     $check = $bdd->prepare('SELECT id_utilisateur FROM utilisateurs WHERE token = ?');
     $check->execute(array($_SESSION['user']));
     $data = $check->fetch();
     $row = $check->rowCount();
 
     $id_utilisateur = $data['id_utilisateur'];
-    
-    echo("Erreur 4");
 
     if ($row > 0) {// Si la requete renvoie un 0 alors l'utilisateur n'a pas été retrouvé
-    
-        echo("Erreur 5");
 
         // On enregistre la date de publication
         $date_publication = date('Y-m-d', $_SERVER['REQUEST_TIME']);
@@ -45,8 +34,6 @@ if(!empty($_POST['titre']) && !empty($_POST['categorie']) && !empty($_POST['etat
         // On insère le tout dans la base de données
         $insert = $bdd->prepare('INSERT INTO annonces(id_utilisateur, titre, categorie, etat, description, prix, date_publication) 
                                     VALUES(:id_utilisateur, :titre, :categorie, :etat, :description, :prix, :date_publication)');
-        
-        echo("Erreur 6");
 
         $insert->execute(array(
             'id_utilisateur' => $id_utilisateur,
@@ -63,8 +50,6 @@ if(!empty($_POST['titre']) && !empty($_POST['categorie']) && !empty($_POST['etat
 
     // Chemin où vous souhaitez stocker les images téléchargées
     $targetDir = "./ad_pics/";
-
-    echo("Erreur 7");
 
     // Boucle à travers tous les fichiers téléchargés
     foreach ($_FILES["images"]["name"] as $key => $fileName){
@@ -98,13 +83,5 @@ if(!empty($_POST['titre']) && !empty($_POST['categorie']) && !empty($_POST['etat
         }
     }
     // On redirige avec le message de succès
-    // header('Location:post_ad.php?reg_err=success');
-}else{ 
-    echo("Erreur entrées");
-    echo($_POST['titre']);
-    echo($_POST['prix']);
-    echo($_POST['description']);
-    echo($_POST['categorie']);
-    echo($_POST['etat']);
-    echo($_FILES['images']);
+    header('Location:post_ad.php?reg_err=success');
 }
