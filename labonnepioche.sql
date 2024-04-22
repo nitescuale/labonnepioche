@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 13 avr. 2024 à 15:15
--- Version du serveur : 8.2.0
--- Version de PHP : 8.2.13
+-- Généré le : lun. 22 avr. 2024 à 19:27
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,9 +37,20 @@ CREATE TABLE IF NOT EXISTS `annonces` (
   `categorie` text NOT NULL,
   `etat` text NOT NULL,
   `date_publication` date NOT NULL,
+  `vendu` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_annonce`),
   KEY `id_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `annonces`
+--
+
+INSERT INTO `annonces` (`id_annonce`, `id_utilisateur`, `titre`, `description`, `prix`, `categorie`, `etat`, `date_publication`, `vendu`) VALUES
+(7, 6, 'Lego', 'Lego', 25, 'Loisirs', 'Très bon état', '2024-04-22', 0),
+(8, 6, 'Lego', 'Lego', 25, 'Loisirs', 'Très bon état', '2024-04-22', 0),
+(9, 6, 'Lego', 'Lego', 25, 'Loisirs', 'Très bon état', '2024-04-22', 0),
+(10, 6, 'Lego', 'Lego', 25, 'Loisirs', 'Très bon état', '2024-04-22', 0);
 
 -- --------------------------------------------------------
 
@@ -52,7 +63,23 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id_categorie` int NOT NULL AUTO_INCREMENT,
   `nom_categorie` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id_categorie`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `categories`
+--
+
+INSERT INTO `categories` (`id_categorie`, `nom_categorie`) VALUES
+(1, 'Autres'),
+(2, 'Électronique'),
+(3, 'Emploi'),
+(4, 'Famille'),
+(5, 'Immobilier'),
+(6, 'Location de vacances'),
+(7, 'Loisirs'),
+(8, 'Maison & Jardin'),
+(9, 'Mode'),
+(10, 'Véhicules');
 
 -- --------------------------------------------------------
 
@@ -65,7 +92,18 @@ CREATE TABLE IF NOT EXISTS `etats_produit` (
   `id_etat` int NOT NULL AUTO_INCREMENT,
   `nom_etat` text NOT NULL,
   PRIMARY KEY (`id_etat`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `etats_produit`
+--
+
+INSERT INTO `etats_produit` (`id_etat`, `nom_etat`) VALUES
+(1, 'Neuf'),
+(2, 'Très bon état'),
+(3, 'Bon état'),
+(4, 'État satisfaisant'),
+(5, 'État correct');
 
 -- --------------------------------------------------------
 
@@ -96,7 +134,16 @@ CREATE TABLE IF NOT EXISTS `photos_annonces` (
   `url_photo` text NOT NULL,
   PRIMARY KEY (`id_photo`),
   KEY `id_annonce` (`id_annonce`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `photos_annonces`
+--
+
+INSERT INTO `photos_annonces` (`id_photo`, `id_annonce`, `url_photo`) VALUES
+(1, 10, 'http://localhost/labonnepioche/ad_pics/f58e48cc-73bc-48c5-98d0-0416fcae285c.jpeg'),
+(2, 10, 'http://localhost/labonnepioche/ad_pics/20e3aaa7-d0c2-461d-92cb-49443a0e8c2c.jpeg'),
+(3, 10, 'http://localhost/labonnepioche/ad_pics/16c57286-5a4c-40ff-93d7-29a94b3fd487.jpeg');
 
 -- --------------------------------------------------------
 
@@ -150,13 +197,23 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `prenom` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `email` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ip` varchar(20) NOT NULL,
+  `token` text NOT NULL,
   `url_photo_profil` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `date_inscription` date NOT NULL,
   `ville` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `pays` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_utilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `utilisateurs`
+--
+
+INSERT INTO `utilisateurs` (`id_utilisateur`, `nom`, `prenom`, `email`, `password`, `ip`, `token`, `url_photo_profil`, `date_inscription`, `ville`, `pays`, `admin`) VALUES
+(6, 'Nitescu', 'Alexandru', 'nitescuale@cy-tech.fr', 'a5ce47bc20c89b74dd3e06ffa403ed608a994aa2d95a6d169698bba8356d3936', '::1', '2147483647', 'http://localhost/labonnepioche/pfps/user_icon.png', '2024-04-14', '', '', 0),
+(12, 'test', 'test', 'test@test.fr', '2096676b2c0ba76e4fd51429c9c5009d3339ba68a1edb32cdc0e3c07a09b17c6', '::1', '1', 'http://localhost/labonnepioche/pfps/9e8ec3c525194846c3b360a6095d5f37.jpg', '2024-04-18', '', '', 0);
 
 --
 -- Contraintes pour les tables déchargées

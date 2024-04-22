@@ -19,7 +19,7 @@
             <a href="accueil.php"><h3><-- Retour à l'accueil</h3></a> <!-- Retour à l'accueil si l'on ne veut pas poster d'annonce -->         
         </header>
         <div class="login-form">                            <!-- Différentes options pour s'occuper des erreurs et messages d'erreurs -->
-            <form action="post_ad_process.php" method="post">         <!-- On associe le processus connexion.php au formulaire, qui recevra les données de manière POST-->
+            <form action="post_ad_process.php" method="post" enctype="multipart/form-data">         <!-- On associe le processus connexion.php au formulaire, qui recevra les données de manière POST-->
                 <h2 class="text-center">Je poste une annonce :</h2>       
                 <div class="form-group">
                     <h4> Titre : </h4>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label>Catégorie :</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="categories">
+                    <select class="form-control" id="categorie" name="categorie">
                         <?php
                         
                         // Requête pour récupérer les options depuis la base de données
@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label>État :</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="etat">
+                    <select class="form-control" id="etat" name="etat">
                         <?php
                         
                         // Requête pour récupérer les options depuis la base de données
@@ -62,11 +62,11 @@
                 </div>
                 <div class="form-group">
                     <label>Description :</label>
-                    <textarea class="form-control" id="description" rows="3"></textarea>
+                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Prix :</label>
-                    <input type="number" id="prix" class="form-control" placeholder="En euros"/>
+                    <input type="number" id="prix" name="prix" class="form-control" placeholder="En euros"/>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Publier mon annonce</button>      <!-- Bouton d'envoi/de submit du formulaire afin de se connecter -->
