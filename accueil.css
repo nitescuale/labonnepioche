@@ -136,9 +136,50 @@ header a.pfp_login img{
 /*Menu*/
 
 .menu{
-  position: relative;
+  position: absolute;
   margin-top: 200px;
+  margin-left: 10px;
 }
+
+
+/* Annonces */
+
+.annonces-container {
+  margin-top: 10%; /* Marge au-dessus des annonces */
+  margin-left: 15%;
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border: red solid;
+
+}
+
+.annonces-wrapper {
+  width: 400px; /* Ajustement pour prendre en compte la marge entre les annonces */
+  border:#0056b3 solid;
+}
+
+.annonce {
+  width: 100%; /* Ajustez la largeur de chaque annonce selon vos besoins */
+  margin-bottom: 20px; /* Espace entre les annonces */
+  display: flex;
+}
+
+.annonce a{
+  text-decoration: none;
+}
+
+.annonce .details{
+  margin-left: 25px;
+}
+
+.annonce img {
+  width: 200px;
+  height: 150px; /* Taille de l'image */
+  /* Autres styles pour l'image */
+}
+
 
 /* Lien/bouton de connexion */
 
