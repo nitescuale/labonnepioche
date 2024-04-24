@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 22 avr. 2024 à 19:27
--- Version du serveur : 8.0.31
--- Version de PHP : 8.0.26
+-- Généré le : mer. 24 avr. 2024 à 19:26
+-- Version du serveur : 8.2.0
+-- Version de PHP : 8.2.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,17 +40,15 @@ CREATE TABLE IF NOT EXISTS `annonces` (
   `vendu` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_annonce`),
   KEY `id_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `annonces`
 --
 
 INSERT INTO `annonces` (`id_annonce`, `id_utilisateur`, `titre`, `description`, `prix`, `categorie`, `etat`, `date_publication`, `vendu`) VALUES
-(7, 6, 'Lego', 'Lego', 25, 'Loisirs', 'Très bon état', '2024-04-22', 0),
-(8, 6, 'Lego', 'Lego', 25, 'Loisirs', 'Très bon état', '2024-04-22', 0),
-(9, 6, 'Lego', 'Lego', 25, 'Loisirs', 'Très bon état', '2024-04-22', 0),
-(10, 6, 'Lego', 'Lego', 25, 'Loisirs', 'Très bon état', '2024-04-22', 0);
+(10, 6, 'Lego', 'Lego', 25, 'Loisirs', 'Très bon état', '2024-04-22', 0),
+(11, 6, 'Voiture', 'Alpine A310 comme neuve', 65000, 'Véhicules', 'Neuf', '2024-04-23', 0);
 
 -- --------------------------------------------------------
 
@@ -134,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `photos_annonces` (
   `url_photo` text NOT NULL,
   PRIMARY KEY (`id_photo`),
   KEY `id_annonce` (`id_annonce`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `photos_annonces`
@@ -143,7 +141,8 @@ CREATE TABLE IF NOT EXISTS `photos_annonces` (
 INSERT INTO `photos_annonces` (`id_photo`, `id_annonce`, `url_photo`) VALUES
 (1, 10, 'http://localhost/labonnepioche/ad_pics/f58e48cc-73bc-48c5-98d0-0416fcae285c.jpeg'),
 (2, 10, 'http://localhost/labonnepioche/ad_pics/20e3aaa7-d0c2-461d-92cb-49443a0e8c2c.jpeg'),
-(3, 10, 'http://localhost/labonnepioche/ad_pics/16c57286-5a4c-40ff-93d7-29a94b3fd487.jpeg');
+(3, 10, 'http://localhost/labonnepioche/ad_pics/16c57286-5a4c-40ff-93d7-29a94b3fd487.jpeg'),
+(4, 11, 'http://localhost/labonnepioche/ad_pics/alpine-a310-v6-1977.jpg');
 
 -- --------------------------------------------------------
 
