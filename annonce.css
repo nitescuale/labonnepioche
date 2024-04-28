@@ -1,0 +1,190 @@
+/* Entete */
+
+header { 
+    position: fixed;
+    display: flex;
+    padding-bottom: 1px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    text-align: center;
+    background-image: linear-gradient(to top right, white, rgb(161, 161, 161));
+    color: black;
+}
+
+header a, header img{
+    position :auto;
+    margin-right: auto;
+    padding-left: 30px;
+    width: auto;
+    height: 180px;
+}
+
+header a.pfp_login img{
+  position :auto;
+  margin-right: auto;
+  padding-left: 30px;
+  width: auto;
+  height: 10px;
+}
+
+.menu-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#dropdown-icon{
+  margin: auto;
+  padding: 30px;
+  width: 120px;
+  height: 120px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une légère ombre */
+  z-index: 1;
+  list-style-type:none;
+  padding-left: 0;
+  margin-top: -1%;
+  margin-left: 15%;
+  border-radius: 3px; /* Ajoute des coins arrondis */
+  border: 1px solid #ddd; /* Ajoute une bordure */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    height: auto;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.menu-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#dropdown-icon:hover + .dropdown-content {
+    display: block;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+}
+
+.publish-button {
+  position:absolute;
+  padding: 10px 20px; /* Réduit le padding pour rendre le bouton plus compact */
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+  font-family: "Helvetica Neue", Helvetica; /* Utilise la police Helvetica sans serif */
+  font-size: 14px; /* Taille de police légèrement plus petite */
+  margin-left:-13%;
+  margin-top: 5%;
+  height: auto;
+}
+
+.publish-button:hover {
+  background-color: #0056b3;
+}
+
+.search-bar {
+  margin: 0 20px; /* Espacement entre le logo et la barre de recherche, et entre la barre de recherche et les boutons */
+  height: auto; /* La barre de recherche occupe 80% de la hauteur du header */
+  margin-left: 38%;
+  margin-top: 3%;
+  position: absolute;
+  align-self: center;
+}
+
+.search-bar input {
+  width: 200%; /* La barre de recherche s'étend sur toute la largeur disponible */
+  padding: 4px; /* Réduit le padding pour rendre la barre de recherche plus fine */
+  font-size: 14px;
+}
+
+.search-bar button {
+  padding: 4px 8px; /* Réduit le padding pour rendre le bouton de recherche plus compact */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: -14.5%;
+  margin-left: 157%;
+  position: absolute;
+  align-self: center;
+}
+
+h1.no_ad{
+    margin-top: 15%;
+    margin-left: 5%;
+}
+
+.slider-container {
+    max-width: 800px;
+    position: relative;
+    margin: auto;
+    margin-top: 10%;
+    margin-left: 10%;
+    height: 350px;
+    overflow: hidden;
+}
+.menu {
+    position: absolute;
+    left: 0;
+    z-index: 11;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+}
+.menu label {
+    cursor: pointer;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    border-radius: 50px;
+    margin: 0 0.2em 1em;
+}
+.menu label:hover,.menu label:focus {
+    background: #1c87c9;
+}
+.slide-input{
+    opacity: 0;
+}
+.slide-img {
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 10;
+    transition: left 0s 0.75s;
+}
+[id^="slide"]:checked + .slide-img {
+    left: 0;
+    z-index: 100;
+    transition: left 0.65s ease-out;
+}
+
+.details{
+    margin-left: 10%;
+}

@@ -145,7 +145,7 @@ header a.pfp_login img{
 /* Annonces */
 
 .annonces-container {
-  margin-top: 10%; /* Marge au-dessus des annonces */
+  margin-top: 3%; /* Marge au-dessus des annonces */
   margin-left: 15%;
   width: 400px;
   display: flex;
@@ -153,6 +153,10 @@ header a.pfp_login img{
   flex-wrap: wrap;
   border: red solid;
 
+}
+
+.annonces-container:first-of-type{
+  margin-top: 10%; /* Marge au-dessus des annonces */
 }
 
 .annonces-wrapper {

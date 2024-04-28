@@ -11,24 +11,10 @@
 
     <body>
 
-        <link rel="stylesheet" type="text/css" href="accueil.css">
+        <link rel="stylesheet" type="text/css" href="mes_annonces.css">
 
         <header> <!-- Entete -->
             <a href="accueil.php"><img   src="logo_site.png" alt="Logo de mon site web" ></a> <!-- Ajout du logo, qui renvoie à l'accueil si cliqué -->            
-            <?php
-            // 1. Récupérez les catégories depuis la base de données
-            $query = $bdd->query('SELECT nom_categorie FROM categories');
-
-            // 2. Parcourez les résultats et créez les éléments <li> correspondants
-            echo '<ul class="menu">';
-            while ($row = $query->fetch()) {
-                $nom_categorie = $row['nom_categorie'];
-                echo '<li>';
-                echo '<a href="accueil.php?categorie=' . $nom_categorie . '" id="' . $nom_categorie . '">' . $nom_categorie . '</a>';
-                echo '</li>';
-            }
-            echo '</ul>';
-            ?>
         <div class="search-bar">
                 <input type="text" placeholder="Rechercher...">
                 <button type="submit">Rechercher</button>
@@ -66,27 +52,21 @@
                 ?>
             </div>
         </header>
+        <h1 class='titre'> Mes annonces :</h1>
 
         <?php
-        if(isset($_GET['categorie']))
-        {
-            $categorie = htmlspecialchars($_GET['categorie']);
-                // Récupérez les annonces et les photos correspondantes filtrées sur la catégorie depuis la base de données
-                $query = $bdd->prepare('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo 
-                FROM annonces AS a
-                LEFT JOIN photos_annonces AS p ON a.id_annonce = p.id_annonce
-                WHERE a.categorie = ?
-                GROUP BY a.id_annonce');
-                $query->execute(array($categorie));
-        }else{
-        // Récupérez les annonces et les photos correspondantes depuis la base de données
-        $query = $bdd->query('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo 
-                            FROM annonces AS a
+
+        // Récupérez les annonces et les photos correspondantes à l'utilisateur connecté depuis la base de données
+        $check = $bdd->prepare('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo
+                            FROM annonces a
+                            JOIN utilisateurs u ON u.id_utilisateur = a.id_utilisateur
                             LEFT JOIN photos_annonces AS p ON a.id_annonce = p.id_annonce
+                            WHERE u.token = ?
                             GROUP BY a.id_annonce');
-        }
+        $check->execute(array($_SESSION['user']));
+
         // Parcourez les résultats et affichez les annonces avec leurs photos
-        while ($row = $query->fetch()) {
+        while ($row = $check->fetch()) {
             $id_annonce = $row['id_annonce'];
             $titre = $row['titre'];
             $prix = $row['prix'];
@@ -109,5 +89,3 @@
         }
         ?>
     </body>
-
-</html>
