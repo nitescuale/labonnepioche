@@ -30,9 +30,28 @@
             echo '</ul>';
             ?>
         <div class="search-bar">
-                <input type="text" placeholder="Rechercher...">
-                <button type="submit">Rechercher</button>
-            </div>
+            <input type="text" id="search-input" placeholder="Rechercher..." onkeydown="handleKeyDown(event)">
+            <button type="button" onclick="performSearch()">Rechercher</button>
+        </div>
+
+        <script>
+            function performSearch() {
+                var searchText = document.getElementById('search-input').value;
+                searchText = capitalizeFirstLetter(searchText.toLowerCase());
+                window.location.href = 'http://localhost/labonnepioche/accueil.php?search=' + searchText;
+            }
+
+            function capitalizeFirstLetter(text) {
+                return text.charAt(0).toUpperCase() + text.slice(1);
+            }
+
+            function handleKeyDown(event) {
+                if (event.key === 'Enter') {
+                    performSearch();
+                }
+            }
+        </script>
+
             <div class="header-buttons">
                 <a href="post_ad.php" class="publish-button">Publier une annonce</a>
                 <?php
@@ -78,6 +97,16 @@
                 WHERE a.categorie = ?
                 GROUP BY a.id_annonce');
                 $query->execute(array($categorie));
+        }else if(isset($_GET['search']))
+        {
+            $search = htmlspecialchars($_GET['search']);
+                // Récupérez les annonces et les photos correspondantes filtrées sur la catégorie depuis la base de données
+                $query = $bdd->prepare('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo 
+                FROM annonces AS a
+                LEFT JOIN photos_annonces AS p ON a.id_annonce = p.id_annonce
+                WHERE a.titre = ?
+                GROUP BY a.id_annonce');
+                $query->execute(array($search));
         }else{
         // Récupérez les annonces et les photos correspondantes depuis la base de données
         $query = $bdd->query('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo 
