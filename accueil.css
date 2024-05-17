@@ -186,3 +186,45 @@ header a img {
   margin-left: 10px; /* Espacement entre le bouton publier et le logo */
   border-radius: 50%;
 }
+
+
+/* Styles pour le menu déroulant de l'utilisateur */
+.menu-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-dropdown img {
+  height: 60px; /* Ajustez la taille si nécessaire */
+  width: 60px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0; /* Aligné à droite */
+  background-color: #a7bde4; /* Même couleur que la barre des catégories */
+  min-width: 200px; /* Largeur minimale pour correspondre à la barre des catégories */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Ombre similaire */
+  z-index: 1;
+  border-radius: 8px; /* Bordures arrondies */
+}
+
+.menu-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-radius: 4px;
+}
+
+.dropdown-content a:hover {
+  background-color: #6a92d4;
+  color: white;
+}
