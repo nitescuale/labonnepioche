@@ -199,7 +199,7 @@ header a img {
   height: 60px; /* Ajuster la taille du logo pour qu'il soit de la même hauteur que le logo du site */
   width: 60px;
   cursor: pointer;
-  margin-left: 10px; /* Espacement entre le bouton publier et le logo */
+  margin-left: 20px; /* Augmenter l'espacement entre le bouton publier et le logo */
   border-radius: 50%;
 }
 
@@ -225,6 +225,7 @@ header a img {
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Ombre similaire */
   z-index: 1;
   border-radius: 8px; /* Bordures arrondies */
+  list-style: none; /* Supprime les points noirs */
 }
 
 .menu-dropdown:hover .dropdown-content {

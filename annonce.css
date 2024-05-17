@@ -137,13 +137,14 @@ header a img {
 
 .annonces-container {
   display: flex;
-  justify-content: center; /* Centrage des annonces */
+  justify-content: center; /* Centrage horizontal des annonces */
+  align-items: flex-start; /* Aligner en haut */
   flex-wrap: wrap;
-  margin-top: 120px; /* Espacement pour s'assurer que les annonces sont visibles */
+  margin-top: 100px; /* Espacement pour positionner les annonces plus haut */
 }
 
 .annonce {
-  flex: 0 1 600px; /* Flexibilité et base à 600px pour ajustement automatique */
+  flex: 0 1 300px; /* Flexibilité et base à 300px pour ajustement automatique */
   margin: 20px; /* Espacement pour une meilleure séparation */
   border: 3px solid #5a82d1; /* Bordure colorée */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Amélioration de l'ombre */
@@ -156,11 +157,10 @@ header a img {
   transform: scale(1.05); /* Agrandir légèrement au survol */
 }
 
-.annonce .slide img {
-  width: 60%; /* Réduire la largeur à 60% */
+.annonce img {
+  width: 100%;
   height: auto;
   object-fit: cover;
-  margin: 0 auto; /* Centrer l'image */
 }
 
 .annonce .details {
@@ -292,6 +292,7 @@ header a img {
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Ombre similaire */
   z-index: 1;
   border-radius: 8px; /* Bordures arrondies */
+  list-style: none; /* Supprime les points noirs */
 }
 
 .menu-dropdown:hover .dropdown-content {

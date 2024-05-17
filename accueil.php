@@ -28,7 +28,7 @@
                     $url_photo_profil = $data['url_photo_profil'];
                     // Afficher le menu défilant
                     echo "<div class='menu-dropdown'>";
-                    echo "<img id='dropdown-icon' src='$url_photo_profil' alt='Icône utilisateur'>";
+                    echo "<img id='dropdown-icon' src='$url_photo_profil' alt='Icône utilisateur' class='login-logo'>";
                     echo "<ul class='dropdown-content' id='dropdown-content'>";
                     echo "<li><a href='profil.php'>Mon profil</a></li>";
                     echo "<li><a href='favoris.php'>Mes favoris</a></li>";
@@ -39,7 +39,7 @@
                     echo "</div>";
                 } else {
                     // Afficher l'icône de connexion/inscription par défaut
-                    echo "<a href='login.php' class='pfp_login'><img src='login.png' alt='Connexion/Inscription' style='width: 100px; height: 100px; margin-left:-50%; margin-top:25%;'></a>";
+                    echo "<a href='login.php' class='pfp_login'><img src='login.png' alt='Connexion/Inscription' class='login-logo'></a>";
                 }
                 ?>
             </div>
