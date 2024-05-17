@@ -16,8 +16,8 @@
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Récupération des annonces, avec filtre optionnel par catégorie
-    function fetchAnnonces($db, $categorie = null) {
+    // Récupération des annonces, avec filtre optionnel par catégorie ou par recherche
+    function fetchAnnonces($db, $categorie = null, $search = null) {
         if ($categorie) {
             $stmt = $db->prepare('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo 
                                   FROM annonces AS a 
@@ -25,6 +25,13 @@
                                   WHERE a.categorie = ?
                                   GROUP BY a.id_annonce');
             $stmt->execute([$categorie]);
+        } else if (isset($search)) {
+            $stmt = $db->prepare('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo 
+                                  FROM annonces AS a
+                                  LEFT JOIN photos_annonces AS p ON a.id_annonce = p.id_annonce
+                                  WHERE a.titre = ?
+                                  GROUP BY a.id_annonce');
+            $stmt->execute([htmlspecialchars($search)]);
         } else {
             $stmt = $db->query('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo 
                                 FROM annonces AS a
@@ -35,7 +42,7 @@
     }
 
     $categories = fetchCategories($bdd);
-    $annonces = fetchAnnonces($bdd, $_GET['categorie'] ?? null);
+    $annonces = fetchAnnonces($bdd, $_GET['categorie'] ?? null, $_GET['search'] ?? null);
     ?>
 
     <header>
@@ -46,8 +53,8 @@
             <?php endforeach; ?>
         </ul>
         <div class="search-bar">
-            <input type="text" placeholder="Rechercher...">
-            <button type="submit">Rechercher</button>
+            <input type="text" id="search-input" placeholder="Rechercher..." onkeydown="handleKeyDown(event)">
+            <button type="button" onclick="performSearch()">Rechercher</button>
         </div>
         <div class="header-buttons">
             <a href="post_ad.php" class="publish-button">Publier une annonce</a>
@@ -85,5 +92,23 @@
             </div>
         <?php endforeach; ?>
     </div>
+
+    <script>
+        function performSearch() {
+            var searchText = document.getElementById('search-input').value;
+            searchText = capitalizeFirstLetter(searchText.toLowerCase());
+            window.location.href = 'http://localhost/labonnepioche/accueil.php?search=' + searchText;
+        }
+
+        function capitalizeFirstLetter(text) {
+            return text.charAt(0).toUpperCase() + text.slice(1);
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+    </script>
 </body>
 </html>
