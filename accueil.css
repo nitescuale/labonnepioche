@@ -133,170 +133,58 @@ header a.pfp_login img{
   align-self: center;
 }
 
-/*Menu*/
-
-.menu{
-  position: absolute;
-  margin-top: 200px;
-  margin-left: 10px;
+h1.no_ad{
+    margin-top: 15%;
+    margin-left: 5%;
 }
 
-
-/* Annonces */
-
-.annonces-container {
-  margin-top: 3%; /* Marge au-dessus des annonces */
-  margin-left: 15%;
-  width: 400px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  border: red solid;
-
+.slider-container {
+    max-width: 800px;
+    position: relative;
+    margin: auto;
+    margin-top: 10%;
+    margin-left: 10%;
+    height: 350px;
+    overflow: hidden;
+}
+.menu {
+    position: absolute;
+    left: 0;
+    z-index: 11;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+}
+.menu label {
+    cursor: pointer;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    border-radius: 50px;
+    margin: 0 0.2em 1em;
+}
+.menu label:hover,.menu label:focus {
+    background: #1c87c9;
+}
+.slide-input{
+    opacity: 0;
+}
+.slide-img {
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 10;
+    transition: left 0s 0.75s;
+}
+[id^="slide"]:checked + .slide-img {
+    left: 0;
+    z-index: 100;
+    transition: left 0.65s ease-out;
 }
 
-.annonces-container:first-of-type{
-  margin-top: 10%; /* Marge au-dessus des annonces */
+.details{
+    margin-left: 10%;
 }
-
-.annonces-wrapper {
-  width: 400px; /* Ajustement pour prendre en compte la marge entre les annonces */
-  border:#0056b3 solid;
-}
-
-.annonce {
-  width: 100%; /* Ajustez la largeur de chaque annonce selon vos besoins */
-  margin-bottom: 20px; /* Espace entre les annonces */
-  display: flex;
-}
-
-.annonce a{
-  text-decoration: none;
-}
-
-.annonce .details{
-  margin-left: 25px;
-}
-
-.annonce img {
-  width: 200px;
-  height: 150px; /* Taille de l'image */
-  /* Autres styles pour l'image */
-}
-
-
-/* Lien/bouton de connexion */
-
-a#connexion {
-  display: block;
-  margin-top: -1.7%;
-  margin-left: 80%;
-  width:200px;
-  height: 40px;
-  text-align: middle;
-}
-
-a#connexion button{
-  border-radius: 5px;
-  width:inherit;
-  height: inherit;
-}
-a#connexion button:hover{
-  background-color: lightblue;
-}
-
-/* Texte */
-
-div#texte {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    text-align: justify;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 50px;
-    color: grey;
-    font-family: Helvetica, sans-serif;
-    font-weight: lighter;
-    font-size: 14px;
-    letter-spacing: 1px;
-  }
-
-  div#texte div{
-    padding: 10px;
-    margin-left:20px;
-    margin-right: 20px;
-  }
-
- /* Tableaux */
-
- div#table {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    text-align: justify;
-    padding-left: 475px;
-    padding-right: 400px;
-    padding-bottom: 50px;
-    color: grey;
-    font-family: Helvetica, sans-serif;
-    font-weight: lighter;
-    font-size: 14px;
-    letter-spacing: 1px;
-  }
-
-  div#table table{
-    border: 1px solid black;
-    width: 225px;
-    height: 200px;
-  }
-
-  div#table table th{
-    padding: 10px 10px;
-    font-family: Helvetica, sans-serif;
-    font-weight: lighter;
-    font-size: 22px;
-  }
-  div#table table td{
-    padding: 0px 10px;
-    font-family: Helvetica, sans-serif;
-    font-weight: lighter;
-    text-align: justify;
-    font-size: 16px;
-  }
-  div#table table tr{
-    height: 50%;
-    width: 200px;
-  }
-
-/*rose*/
-  div#table table#rose{
-    border: 3px solid #e1046d;
-    border-collapse: collapse;
-  }
-  div#table table#rose th{
-    background-image:  linear-gradient(to right, lightpink, #e1046d);
-  }
-  div#table table#rose td{
-    background-color: rgb(255, 220, 226);
-  }
-/*vert*/
-div#table table#vert{
-    border: 3px solid #048c5d;
-    border-collapse: collapse;
-  }
-  div#table table#vert th{
-    background-image:  linear-gradient(to right, #9FD8C4, #048c5d);
-  }
-  div#table table#vert td{
-    background-color: #ceffef;
-  }
-/*bleu*/
-div#table table#bleu{
-    border: 3px solid #049dc3;
-    border-collapse: collapse;
-  }
-  div#table table#bleu th{
-    background-image:  linear-gradient(to right, lightblue, #049dc3);
-  }
-  div#table table#bleu td{
-    background-color: rgb(216, 245, 255);
-  }
