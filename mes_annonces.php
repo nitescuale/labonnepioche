@@ -1,61 +1,61 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <?php 
     session_start();            // Démarrage de la session 
     require_once 'db_config.php';  // Connexion à la bdd
 ?>
 
-<html>
-    <head>
-
-    </head>
-
-    <body>
-
-        <link rel="stylesheet" type="text/css" href="mes_annonces.css">
-
-        <header> <!-- Entete -->
-            <a href="accueil.php"><img   src="logo_site.png" alt="Logo de mon site web" ></a> <!-- Ajout du logo, qui renvoie à l'accueil si cliqué -->            
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes annonces</title>
+    <link rel="stylesheet" href="accueil.css">
+    <link rel="stylesheet" href="mes_annonces.css">
+</head>
+<body>
+    <header>
+        <a href="accueil.php" class="logo"><img src="logo.png" alt="Logo du site"></a>
         <div class="search-bar">
-                <input type="text" placeholder="Rechercher...">
-                <button type="submit">Rechercher</button>
-            </div>
-            <div class="header-buttons">
-                <a href="post_ad.php" class="publish-button">Publier une annonce</a>
-                <?php
+            <input type="text" id="search-input" placeholder="Rechercher..." onkeydown="handleKeyDown(event)">
+            <button type="button" onclick="performSearch()">Rechercher</button>
+        </div>
+        <div class="header-buttons">
+            <a href="post_ad.php" class="publish-button">Publier une annonce</a>
+            <?php
 
-                // Vérifie si l'utilisateur est connecté
-                if (isset($_SESSION['user'])) {
+            // Vérifie si l'utilisateur est connecté
+            if (isset($_SESSION['user'])) {
 
-                    // On récupère les données et l'URL de la photo de profil de l'utilisateur depuis la base de données
-                    $check = $bdd->prepare('SELECT nom, prenom, email, password, token, id_utilisateur, url_photo_profil FROM utilisateurs WHERE token = ?');
-                    $check->execute(array($_SESSION['user']));
-                    $data = $check->fetch();
+                // On récupère les données et l'URL de la photo de profil de l'utilisateur depuis la base de données
+                $check = $bdd->prepare('SELECT nom, prenom, email, password, token, id_utilisateur, url_photo_profil FROM utilisateurs WHERE token = ?');
+                $check->execute(array($_SESSION['user']));
+                $data = $check->fetch();
 
-                    // Afficher l'icône de l'utilisateur connecté
-                    $user = $_SESSION['user'];
-                    $url_photo_profil = $data['url_photo_profil'];
-                    // Afficher le menu défilant
-                    echo "<div class='menu-dropdown'>";
-                    echo "<img id='dropdown-icon' src='$url_photo_profil' alt='Icône utilisateur'>";
-                    echo "<ul class='dropdown-content' id='dropdown-content'>";
-                    echo "<li><a href='profil.php'>Mon profil</a></li>";
-                    echo "<li><a href='mes_favoris.php'>Mes favoris</a></li>";
-                    echo "<li><a href='mes_annonces.php'>Mes annonces</a></li>";
-                    echo "<li><a href='mes_transactions.php'>Mes transactions</a></li>";
-                    echo "<li><a href='logoff.php'>Se déconnecter</a></li>";
-                    echo "</ul>";
-                    echo "</div>";
-                } else {
-                    // Afficher l'icône de connexion/inscription par défaut
-                    echo "<a href='login.php' class='pfp_login'><img src='login_icon.png' alt='Connexion/Inscription' style='width: 100px; height: 100px; margin-left:-50%; margin-top:25%;'></a>";
-                }
-                ?>
-            </div>
-        </header>
-        <h1 class='titre'> Mes annonces :</h1>
+                // Afficher l'icône de l'utilisateur connecté
+                $user = $_SESSION['user'];
+                $url_photo_profil = $data['url_photo_profil'];
+                // Afficher le menu défilant
+                echo "<div class='menu-dropdown'>";
+                echo "<img id='dropdown-icon' src='$url_photo_profil' alt='Icône utilisateur'>";
+                echo "<div class='dropdown-content'>";
+                echo "<a href='profil.php'>Mon profil</a>";
+                echo "<a href='mes_favoris.php'>Mes favoris</a>";
+                echo "<a href='mes_annonces.php'>Mes annonces</a>";
+                echo "<a href='mes_transactions.php'>Mes transactions</a>";
+                echo "<a href='logoff.php'>Se déconnecter</a>";
+                echo "</div>";
+                echo "</div>";
+            } else {
+                // Afficher l'icône de connexion/inscription par défaut
+                echo "<a href='login.php' class='pfp_login'><img src='login.png' alt='Connexion/Inscription' class='login-logo'></a>";
+            }
+            ?>
+        </div>
+    </header>
+    <h1 class="titre">Mes annonces :</h1>
 
+    <div class="annonces-container">
         <?php
-
         // Récupérez les annonces et les photos correspondantes à l'utilisateur connecté depuis la base de données
         $check = $bdd->prepare('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo
                             FROM annonces a
@@ -74,18 +74,36 @@
             $etat = $row['etat'];
             $url_photo = $row['url_photo'];
 
-            echo '<div class="annonces-container">';
-                echo '<div class="annonces-wrapper">';
-                    echo '<div class="annonce">';
-                        echo '<img src="' . $url_photo . '" alt="' . $titre . '">';
-                        echo '<div class="details">';
-                        echo '<h2><a class="lien-annonce" href="annonce.php?annonce=' . $id_annonce . '">' . $titre . '</a></h2>';
-                        echo '<p class="etat">' . $etat . '</p>';
-                        echo '<p class="prix">' . $prix . ' € </p>';
-                        echo '</div>';
+            echo '<div class="annonces-wrapper">';
+                echo '<div class="annonce">';
+                    echo '<img src="' . $url_photo . '" alt="' . $titre . '">';
+                    echo '<div class="details">';
+                    echo '<h2><a class="lien-annonce" href="annonce.php?annonce=' . $id_annonce . '">' . $titre . '</a></h2>';
+                    echo '<p class="etat">' . $etat . '</p>';
+                    echo '<p class="prix">' . $prix . ' € </p>';
                     echo '</div>';
                 echo '</div>';
             echo '</div>';
         }
         ?>
-    </body>
+    </div>
+
+    <script>
+        function performSearch() {
+            var searchText = document.getElementById('search-input').value;
+            searchText = capitalizeFirstLetter(searchText.toLowerCase());
+            window.location.href = 'http://localhost/labonnepioche/accueil.php?search=' + searchText;
+        }
+
+        function capitalizeFirstLetter(text) {
+            return text.charAt(0).toUpperCase() + text.slice(1);
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+    </script>
+</body>
+</html>
