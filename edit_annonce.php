@@ -25,7 +25,7 @@ if (isset($_GET['id_annonce'])) {
     $query->execute(array($id_annonce));
     $annonce_owner = $query->fetch();
 
-    $user_check = $bdd->prepare('SELECT id_utilisateur FROM utilisateurs WHERE token = ?');
+    $user_check = $bdd->prepare('SELECT nom, prenom, email, password, token, id_utilisateur, url_photo_profil FROM utilisateurs WHERE token = ?');
     $user_check->execute(array($_SESSION['user']));
     $user = $user_check->fetch();
 
