@@ -66,14 +66,14 @@
                 ?>
                 <div class='menu-dropdown'>
                     <img id='dropdown-icon' src='<?= $user['url_photo_profil'] ?>' alt='Icône utilisateur'>
-                    <ul class='dropdown-content'>
-                        <li><a href='profil.php'>Mon profil</a></li>
-                        <li><a href='mes_favoris.php'>Mes favoris</a></li>
-                        <li><a href='mes_annonces.php'>Mes annonces</a></li>
-                        <li><a href='mes_transactions.php'>Mes transactions</a></li>
-                        <li><a href='logoff.php'>Se déconnecter</a></li>
-                    </ul>
+                    <div class='dropdown-content'>
+                        <a href='profil.php'>Mon profil</a>
+                        <a href='mes_favoris.php'>Mes favoris</a>
+                        <a href='mes_annonces.php'>Mes annonces</a>
+                        <a href='mes_transactions.php'>Mes transactions</a>
+                        <a href='logoff.php'>Se déconnecter</a>
                 </div>
+</div>
             <?php else: ?>
                 <a href='login.php' class='pfp_login'><img src='login.png' alt='Connexion/Inscription' class="login-logo"></a>
             <?php endif; ?>
