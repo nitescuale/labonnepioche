@@ -74,7 +74,6 @@
             $etat = $row['etat'];
             $url_photo = $row['url_photo'];
 
-<<<<<<< HEAD
             echo '<div class="annonces-container">';
                 echo '<div class="annonces-wrapper">';
                     echo '<div class="annonce">';
@@ -85,15 +84,6 @@
                         echo '<p class="prix">' . $prix . ' € </p>';
                         echo '</div>';
                         echo '<a href="edit_annonce.php?id_annonce=' . $id_annonce . '" class="edit-button">Modifier</a>';
-=======
-            echo '<div class="annonces-wrapper">';
-                echo '<div class="annonce">';
-                    echo '<img src="' . $url_photo . '" alt="' . $titre . '">';
-                    echo '<div class="details">';
-                    echo '<h2><a class="lien-annonce" href="annonce.php?annonce=' . $id_annonce . '">' . $titre . '</a></h2>';
-                    echo '<p class="etat">' . $etat . '</p>';
-                    echo '<p class="prix">' . $prix . ' € </p>';
->>>>>>> 788debaa7997f15fa28bbc776a73f01cec953095
                     echo '</div>';
                 echo '</div>';
             echo '</div>';
