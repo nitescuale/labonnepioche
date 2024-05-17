@@ -107,7 +107,7 @@ header a img {
 }
 
 .menu {
-  margin-top: 2%;
+  margin-top: 80px; /* Ajout de marge pour éviter la superposition avec le header */
   position: fixed;
   top: 80px;
   left: 0;
@@ -116,6 +116,7 @@ header a img {
   box-shadow: 2px 0 8px rgba(0,0,0,0.1);
   padding: 10px;
   border-radius: 8px;
+  z-index: 999; /* Assurez-vous que le menu est au-dessus des autres éléments */
 }
 
 .menu a {
@@ -137,19 +138,22 @@ header a img {
 
 .annonces-container {
   display: flex;
-  justify-content: center; /* Centrage des annonces */
   flex-wrap: wrap;
-  margin-top: 120px; /* Espacement pour s'assurer que les annonces sont visibles */
+  justify-content: space-between; /* Ajuste l'espacement entre les annonces */
+  margin-left: 220px; /* Marge pour éviter le chevauchement avec le menu */
+  padding: 20px; /* Ajout de padding pour éviter que les annonces touchent les bords */
+  padding-top: 100px; /* Espacement pour s'assurer que les annonces ne chevauchent pas le header */
 }
 
 .annonce {
-  flex: 0 1 400px; /* Flexibilité et base à 400px pour ajustement automatique */
-  margin: 20px; /* Espacement pour une meilleure séparation */
+  flex: 0 1 calc(50% - 20px); /* Deux annonces par ligne avec un espace de 20px entre elles */
+  margin-bottom: 20px; /* Espacement entre les lignes d'annonces */
   border: 3px solid #5a82d1; /* Bordure colorée */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Amélioration de l'ombre */
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s ease-in-out; /* Effet de survol */
+  background-color: #fff;
 }
 
 .annonce:hover {
@@ -164,18 +168,30 @@ header a img {
 
 .annonce .details {
   padding: 10px;
-  background: #fff;
   text-align: center;
   color: #333;
 }
 
-.annonce .details a {
-  color: #5a82d1;
-  text-decoration: none;
+.annonce .details h2 {
+  font-size: 1.2em;
+  margin: 0.5em 0;
 }
 
-.annonce .details a:hover {
-  text-decoration: underline;
+.annonce .details p {
+  margin: 0.5em 0;
+}
+
+.annonce .details .favorite-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.annonce .details .favorite-button:hover {
+  background-color: #0056b3;
 }
 
 /* Styles pour le logo de connexion/inscription */
@@ -186,7 +202,6 @@ header a img {
   margin-left: 10px; /* Espacement entre le bouton publier et le logo */
   border-radius: 50%;
 }
-
 
 /* Styles pour le menu déroulant de l'utilisateur */
 .menu-dropdown {
