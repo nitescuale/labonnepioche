@@ -39,7 +39,7 @@
                     echo "</div>";
                 } else {
                     // Afficher l'icône de connexion/inscription par défaut
-                    echo "<a href='login.php' class='pfp_login'><img src='login_icon.png' alt='Connexion/Inscription' style='width: 100px; height: 100px; margin-left:-50%; margin-top:25%;'></a>";
+                    echo "<a href='login.php' class='pfp_login'><img src='login.png' alt='Connexion/Inscription' style='width: 100px; height: 100px; margin-left:-50%; margin-top:25%;'></a>";
                 }
                 ?>
             </div>
