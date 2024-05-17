@@ -1,142 +1,89 @@
-<!DOCTYPE html> 
-<?php 
-    session_start();            // Démarrage de la session 
-    require_once 'db_config.php';  // Connexion à la bdd
-?>
-
+<!DOCTYPE html>
 <html>
-    <head>
+<head>
+    <meta charset="UTF-8">
+    <title>La Bonne Pioche</title>
+    <link rel="stylesheet" type="text/css" href="accueil.css">
+</head>
+<body>
+    <?php
+    session_start(); // Démarrage de la session
+    require_once 'db_config.php'; // Connexion à la base de données
 
-    </head>
+    // Récupération des catégories depuis la base de données
+    function fetchCategories($db) {
+        $query = $db->query('SELECT nom_categorie FROM categories');
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-    <body>
+    // Récupération des annonces, avec filtre optionnel par catégorie
+    function fetchAnnonces($db, $categorie = null) {
+        if ($categorie) {
+            $stmt = $db->prepare('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo 
+                                  FROM annonces AS a 
+                                  LEFT JOIN photos_annonces AS p ON a.id_annonce = p.id_annonce
+                                  WHERE a.categorie = ?
+                                  GROUP BY a.id_annonce');
+            $stmt->execute([$categorie]);
+        } else {
+            $stmt = $db->query('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo 
+                                FROM annonces AS a
+                                LEFT JOIN photos_annonces AS p ON a.id_annonce = p.id_annonce
+                                GROUP BY a.id_annonce');
+        }
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-        <link rel="stylesheet" type="text/css" href="accueil.css">
+    $categories = fetchCategories($bdd);
+    $annonces = fetchAnnonces($bdd, $_GET['categorie'] ?? null);
+    ?>
 
-        <header> <!-- Entete -->
-            <a href="accueil.php"><img   src="logo_site.png" alt="Logo de mon site web" ></a> <!-- Ajout du logo, qui renvoie à l'accueil si cliqué -->            
-            <?php
-            // 1. Récupérez les catégories depuis la base de données
-            $query = $bdd->query('SELECT nom_categorie FROM categories');
-
-            // 2. Parcourez les résultats et créez les éléments <li> correspondants
-            echo '<ul class="menu">';
-            while ($row = $query->fetch()) {
-                $nom_categorie = $row['nom_categorie'];
-                echo '<li>';
-                echo '<a href="accueil.php?categorie=' . $nom_categorie . '" id="' . $nom_categorie . '">' . $nom_categorie . '</a>';
-                echo '</li>';
-            }
-            echo '</ul>';
-            ?>
+    <header>
+        <a href="accueil.php" class="logo"><img src="logo.png" alt="Logo du site"></a>
+        <ul class="menu">
+            <?php foreach ($categories as $category): ?>
+                <li><a href="accueil.php?categorie=<?= $category['nom_categorie'] ?>"><?= $category['nom_categorie'] ?></a></li>
+            <?php endforeach; ?>
+        </ul>
         <div class="search-bar">
-            <input type="text" id="search-input" placeholder="Rechercher..." onkeydown="handleKeyDown(event)">
-            <button type="button" onclick="performSearch()">Rechercher</button>
+            <input type="text" placeholder="Rechercher...">
+            <button type="submit">Rechercher</button>
         </div>
-
-        <script>
-            function performSearch() {
-                var searchText = document.getElementById('search-input').value;
-                searchText = capitalizeFirstLetter(searchText.toLowerCase());
-                window.location.href = 'http://localhost/labonnepioche/accueil.php?search=' + searchText;
-            }
-
-            function capitalizeFirstLetter(text) {
-                return text.charAt(0).toUpperCase() + text.slice(1);
-            }
-
-            function handleKeyDown(event) {
-                if (event.key === 'Enter') {
-                    performSearch();
-                }
-            }
-        </script>
-
-            <div class="header-buttons">
-                <a href="post_ad.php" class="publish-button">Publier une annonce</a>
-                <?php
-
-                // Vérifie si l'utilisateur est connecté
-                if (isset($_SESSION['user'])) {
-
-                    // On récupère les données et l'URL de la photo de profil de l'utilisateur depuis la base de données
-                    $check = $bdd->prepare('SELECT nom, prenom, email, password, token, id_utilisateur, url_photo_profil FROM utilisateurs WHERE token = ?');
-                    $check->execute(array($_SESSION['user']));
-                    $data = $check->fetch();
-
-                    // Afficher l'icône de l'utilisateur connecté
-                    $user = $_SESSION['user'];
-                    $url_photo_profil = $data['url_photo_profil'];
-                    // Afficher le menu défilant
-                    echo "<div class='menu-dropdown'>";
-                    echo "<img id='dropdown-icon' src='$url_photo_profil' alt='Icône utilisateur'>";
-                    echo "<ul class='dropdown-content' id='dropdown-content'>";
-                    echo "<li><a href='profil.php'>Mon profil</a></li>";
-                    echo "<li><a href='mes_favoris.php'>Mes favoris</a></li>";
-                    echo "<li><a href='mes_annonces.php'>Mes annonces</a></li>";
-                    echo "<li><a href='mes_transactions.php'>Mes transactions</a></li>";
-                    echo "<li><a href='logoff.php'>Se déconnecter</a></li>";
-                    echo "</ul>";
-                    echo "</div>";
-                } else {
-                    // Afficher l'icône de connexion/inscription par défaut
-                    echo "<a href='login.php' class='pfp_login'><img src='login_icon.png' alt='Connexion/Inscription' style='width: 100px; height: 100px; margin-left:-50%; margin-top:25%;'></a>";
-                }
+        <div class="header-buttons">
+            <a href="post_ad.php" class="publish-button">Publier une annonce</a>
+            <?php if (isset($_SESSION['user'])): ?>
+                <?php 
+                    $data = $bdd->prepare('SELECT url_photo_profil FROM utilisateurs WHERE token = ?');
+                    $data->execute([$_SESSION['user']]);
+                    $user = $data->fetch(); 
                 ?>
+                <div class='menu-dropdown'>
+                    <img id='dropdown-icon' src='<?= $user['url_photo_profil'] ?>' alt='Icône utilisateur'>
+                    <ul class='dropdown-content'>
+                        <li><a href='profil.php'>Mon profil</a></li>
+                        <li><a href='mes_favoris.php'>Mes favoris</a></li>
+                        <li><a href='mes_annonces.php'>Mes annonces</a></li>
+                        <li><a href='mes_transactions.php'>Mes transactions</a></li>
+                        <li><a href='logoff.php'>Se déconnecter</a></li>
+                    </ul>
+                </div>
+            <?php else: ?>
+                <a href='login.php' class='pfp_login'><img src='login.png' alt='Connexion/Inscription' class="login-logo"></a>
+            <?php endif; ?>
+        </div>
+    </header>
+
+    <div class="annonces-container">
+        <?php foreach ($annonces as $annonce): ?>
+            <div class="annonce">
+                <img src="<?= $annonce['url_photo'] ?>" alt="<?= $annonce['titre'] ?>">
+                <div class="details">
+                    <h2><a href="annonce.php?annonce=<?= $annonce['id_annonce'] ?>"><?= $annonce['titre'] ?></a></h2>
+                    <p class="etat"><?= $annonce['etat'] ?></p>
+                    <p class="prix"><?= $annonce['prix'] ?> €</p>
+                </div>
             </div>
-        </header>
-
-        <?php
-        if(isset($_GET['categorie']))
-        {
-            $categorie = htmlspecialchars($_GET['categorie']);
-                // Récupérez les annonces et les photos correspondantes filtrées sur la catégorie depuis la base de données
-                $query = $bdd->prepare('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo 
-                FROM annonces AS a
-                LEFT JOIN photos_annonces AS p ON a.id_annonce = p.id_annonce
-                WHERE a.categorie = ?
-                GROUP BY a.id_annonce');
-                $query->execute(array($categorie));
-        }else if(isset($_GET['search']))
-        {
-            $search = htmlspecialchars($_GET['search']);
-                // Récupérez les annonces et les photos correspondantes filtrées sur la catégorie depuis la base de données
-                $query = $bdd->prepare('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo 
-                FROM annonces AS a
-                LEFT JOIN photos_annonces AS p ON a.id_annonce = p.id_annonce
-                WHERE a.titre = ?
-                GROUP BY a.id_annonce');
-                $query->execute(array($search));
-        }else{
-        // Récupérez les annonces et les photos correspondantes depuis la base de données
-        $query = $bdd->query('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo 
-                            FROM annonces AS a
-                            LEFT JOIN photos_annonces AS p ON a.id_annonce = p.id_annonce
-                            GROUP BY a.id_annonce');
-        }
-        // Parcourez les résultats et affichez les annonces avec leurs photos
-        while ($row = $query->fetch()) {
-            $id_annonce = $row['id_annonce'];
-            $titre = $row['titre'];
-            $prix = $row['prix'];
-            $categorie = $row['categorie'];
-            $etat = $row['etat'];
-            $url_photo = $row['url_photo'];
-
-            echo '<div class="annonces-container">';
-                echo '<div class="annonces-wrapper">';
-                    echo '<div class="annonce">';
-                        echo '<img src="' . $url_photo . '" alt="' . $titre . '">';
-                        echo '<div class="details">';
-                        echo '<h2><a class="lien-annonce" href="annonce.php?annonce=' . $id_annonce . '">' . $titre . '</a></h2>';
-                        echo '<p class="etat">' . $etat . '</p>';
-                        echo '<p class="prix">' . $prix . ' € </p>';
-                        echo '</div>';
-                    echo '</div>';
-                echo '</div>';
-            echo '</div>';
-        }
-        ?>
-    </body>
-
+        <?php endforeach; ?>
+    </div>
+</body>
 </html>
