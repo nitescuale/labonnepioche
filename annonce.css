@@ -1,190 +1,312 @@
-/* Entete */
-
-header { 
-    position: fixed;
-    display: flex;
-    padding-bottom: 1px;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 180px;
-    text-align: center;
-    background-image: linear-gradient(to top right, white, rgb(161, 161, 161));
-    color: black;
+/* Réinitialisation et styles globaux */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif; /* Police globale */
 }
 
-header a, header img{
-    position :auto;
-    margin-right: auto;
-    padding-left: 30px;
-    width: auto;
-    height: 180px;
+body {
+  background-image: url(back-ground.webp); /* Chemin de l'image de fond */
+  background-size: cover; /* Ajuste la taille de l'image pour qu'elle soit entièrement visible */
+  background-position: center; /* Centre l'image de fond */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #333;
 }
 
-header a.pfp_login img{
-  position :auto;
-  margin-right: auto;
-  padding-left: 30px;
+/* Styles pour le header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px; /* Ajuster la hauteur du header */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, #6a92d4, #a7c7e7);
+  padding: 0 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+  font-size: 18px;
+}
+
+header a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+header a img {
+  height: 100%; /* Prend toute la hauteur du header */
   width: auto;
-  height: 10px;
+  margin-right: 20px; /* Espacement entre le logo et la barre de recherche */
 }
 
-.menu-dropdown {
-    position: relative;
-    display: inline-block;
+.search-bar {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  margin: 0 20px;
+  background: #fff; /* Fond blanc */
+  border-radius: 20px; /* Bordures arrondies */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombre */
+  padding: 5px 10px; /* Espacement intérieur */
 }
 
-#dropdown-icon{
+.search-bar input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+.search-bar input::placeholder {
+  color: #999; /* Couleur du placeholder */
+}
+
+.search-bar button {
+  background-color: #5a82d1;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: #4169e1;
+}
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.publish-button {
+  background-color: #ff6347; /* Nouvelle couleur */
+  padding: 10px 20px; /* Augmentation du padding pour un style plus moderne */
+  border-radius: 30px; /* Bordure arrondie */
+  color: white;
+  text-decoration: none;
+  margin-right: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
+  transition: all 0.3s ease; /* Transition pour les effets de survol */
+}
+
+.publish-button:hover {
+  background-color: #ff4500; /* Couleur plus foncée au survol */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Augmentation de l'ombre au survol */
+  transform: translateY(-2px); /* Légère translation vers le haut au survol */
+}
+
+.menu {
+  margin-top: 2%;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 200px;
+  background-color: #a7bde4;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.menu a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.menu a:hover {
+  background-color: #6a92d4;
+  color: white;
+}
+
+.content {
+  padding-top: 120px; /* Espacement pour s'assurer que le contenu ne chevauche pas le header */
+}
+
+.annonces-container {
+  display: flex;
+  justify-content: center; /* Centrage des annonces */
+  flex-wrap: wrap;
+  margin-top: 120px; /* Espacement pour s'assurer que les annonces sont visibles */
+}
+
+.annonce {
+  flex: 0 1 600px; /* Flexibilité et base à 600px pour ajustement automatique */
+  margin: 20px; /* Espacement pour une meilleure séparation */
+  border: 3px solid #5a82d1; /* Bordure colorée */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Amélioration de l'ombre */
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out; /* Effet de survol */
+}
+
+.annonce:hover {
+  transform: scale(1.05); /* Agrandir légèrement au survol */
+}
+
+.annonce .slide img {
+  width: 60%; /* Réduire la largeur à 60% */
+  height: auto;
+  object-fit: cover;
+  margin: 0 auto; /* Centrer l'image */
+}
+
+.annonce .details {
+  padding: 10px;
+  background: #fff;
+  text-align: center;
+  color: #333;
+}
+
+.annonce .details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.annonce .details p {
+  margin: 5px 0;
+}
+
+.annonce .details .description {
+  font-size: 16px;
+  color: #666;
+}
+
+.annonce .details .etat {
+  font-size: 14px;
+  color: #999;
+}
+
+.annonce .details .prix {
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+.annonce .details a {
+  color: #5a82d1;
+  text-decoration: none;
+}
+
+.annonce .details a:hover {
+  text-decoration: underline;
+}
+
+.annonce .favoris-button {
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  padding: 12px 24px; /* Augmenter le padding pour un bouton plus grand */
+  cursor: pointer;
+  margin-top: 15px; /* Ajouter un espacement au-dessus du bouton */
+  border-radius: 30px; /* Bordure arrondie */
+  font-size: 16px; /* Augmenter la taille de la police */
+  font-weight: bold; /* Rendre le texte en gras */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajouter une ombre */
+  transition: all 0.3s ease; /* Transition pour les effets de survol */
+}
+
+.annonce .favoris-button:hover {
+  background-color: #e5533d; /* Couleur plus foncée au survol */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Augmenter l'ombre au survol */
+  transform: translateY(-2px); /* Légère translation vers le haut au survol */
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
   margin: auto;
-  padding: 30px;
-  width: 120px;
-  height: 120px;
+}
+
+.slider {
+  display: flex;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.slide {
+  min-width: 100%;
+  transition: transform 0.5s ease;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.slider-buttons {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.slider-buttons button {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.slider-buttons button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Styles pour le menu déroulant de l'utilisateur */
+.menu-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-dropdown img {
+  height: 60px; /* Ajustez la taille si nécessaire */
+  width: 60px;
+  cursor: pointer;
+  border-radius: 50%;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une légère ombre */
+  right: 0; /* Aligné à droite */
+  background-color: #a7bde4; /* Même couleur que la barre des catégories */
+  min-width: 200px; /* Largeur minimale pour correspondre à la barre des catégories */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Ombre similaire */
   z-index: 1;
-  list-style-type:none;
-  padding-left: 0;
-  margin-top: -1%;
-  margin-left: 15%;
-  border-radius: 3px; /* Ajoute des coins arrondis */
-  border: 1px solid #ddd; /* Ajoute une bordure */
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    height: auto;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
+  border-radius: 8px; /* Bordures arrondies */
 }
 
 .menu-dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 }
 
-#dropdown-icon:hover + .dropdown-content {
-    display: block;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #f0f0f0;
-}
-
-.publish-button {
-  position:absolute;
-  padding: 10px 20px; /* Réduit le padding pour rendre le bouton plus compact */
-  background-color: #007bff;
-  color: white;
+.dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
   text-decoration: none;
-  border: none;
-  border-radius: 3px;
-  transition: background-color 0.3s ease;
-  font-family: "Helvetica Neue", Helvetica; /* Utilise la police Helvetica sans serif */
-  font-size: 14px; /* Taille de police légèrement plus petite */
-  margin-left:-13%;
-  margin-top: 5%;
-  height: auto;
+  display: block;
+  border-radius: 4px;
 }
 
-.publish-button:hover {
-  background-color: #0056b3;
-}
-
-.search-bar {
-  margin: 0 20px; /* Espacement entre le logo et la barre de recherche, et entre la barre de recherche et les boutons */
-  height: auto; /* La barre de recherche occupe 80% de la hauteur du header */
-  margin-left: 38%;
-  margin-top: 3%;
-  position: absolute;
-  align-self: center;
-}
-
-.search-bar input {
-  width: 200%; /* La barre de recherche s'étend sur toute la largeur disponible */
-  padding: 4px; /* Réduit le padding pour rendre la barre de recherche plus fine */
-  font-size: 14px;
-}
-
-.search-bar button {
-  padding: 4px 8px; /* Réduit le padding pour rendre le bouton de recherche plus compact */
-  background-color: #007bff;
+.dropdown-content a:hover {
+  background-color: #6a92d4;
   color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 14px;
-  margin-top: -14.5%;
-  margin-left: 157%;
-  position: absolute;
-  align-self: center;
-}
-
-h1.no_ad{
-    margin-top: 15%;
-    margin-left: 5%;
-}
-
-.slider-container {
-    max-width: 800px;
-    position: relative;
-    margin: auto;
-    margin-top: 10%;
-    margin-left: 10%;
-    height: 350px;
-    overflow: hidden;
-}
-.menu {
-    position: absolute;
-    left: 0;
-    z-index: 11;
-    width: 100%;
-    bottom: 0;
-    text-align: center;
-}
-.menu label {
-    cursor: pointer;
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background: #ccc;
-    border-radius: 50px;
-    margin: 0 0.2em 1em;
-}
-.menu label:hover,.menu label:focus {
-    background: #1c87c9;
-}
-.slide-input{
-    opacity: 0;
-}
-.slide-img {
-    width: 100%;
-    height: 300px;
-    position: absolute;
-    top: 0;
-    left: 100%;
-    z-index: 10;
-    transition: left 0s 0.75s;
-}
-[id^="slide"]:checked + .slide-img {
-    left: 0;
-    z-index: 100;
-    transition: left 0.65s ease-out;
-}
-
-.details{
-    margin-left: 10%;
 }

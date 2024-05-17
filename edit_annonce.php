@@ -76,39 +76,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <title>Modifier l'annonce</title>
-    <link rel="stylesheet" type="text/css" href="mes_annonces.css">
+    <link rel="stylesheet" type="text/css" href="edit_annonce.css">
 </head>
 <body>
-    <h1>Modifier l'annonce</h1>
-    <form method="post">
-        <label for="titre">Titre :</label>
-        <input type="text" id="titre" name="titre" value="<?php echo htmlspecialchars($annonce['titre']); ?>" required><br>
-
-        <label for="prix">Prix :</label>
-        <input type="number" id="prix" name="prix" value="<?php echo htmlspecialchars($annonce['prix']); ?>" required><br>
-
-        <label for="categorie">Catégorie :</label>
-        <select id="categorie" name="categorie" required>
-            <?php foreach ($categories as $cat) : ?>
-                <option value="<?php echo htmlspecialchars($cat['nom_categorie']); ?>" <?php echo ($cat['id_categorie'] == $annonce['categorie']) ? 'selected' : ''; ?>>
-                    <?php echo htmlspecialchars($cat['nom_categorie']); ?>
-                </option>
+    <header>
+        <a href="accueil.php" class="logo"><img src="logo.png" alt="Logo du site"></a>
+        <ul class="menu">
+            <?php
+            function fetchCategories($db) {
+                $query = $db->query('SELECT nom_categorie FROM categories');
+                return $query->fetchAll(PDO::FETCH_ASSOC);
+            }
+            $categories = fetchCategories($bdd);
+            foreach ($categories as $category): ?>
+                <li><a href="accueil.php?categorie=<?= htmlspecialchars($category['nom_categorie']) ?>"><?= htmlspecialchars($category['nom_categorie']) ?></a></li>
             <?php endforeach; ?>
-        </select><br>
+        </ul>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Rechercher..." onkeydown="handleKeyDown(event)">
+            <button type="button" onclick="performSearch()">Rechercher</button>
+        </div>
+        <div class="header-buttons">
+            <a href="post_ad.php" class="publish-button">Publier une annonce</a>
+            <div class='menu-dropdown'>
+                <img id='dropdown-icon' src='<?= htmlspecialchars($user['url_photo_profil']) ?>' alt='Icône utilisateur'>
+                <div class='dropdown-content'>
+                    <a href='profil.php'>Mon profil</a>
+                    <a href='mes_favoris.php'>Mes favoris</a>
+                    <a href='mes_annonces.php'>Mes annonces</a>
+                    <a href='mes_transactions.php'>Mes transactions</a>
+                    <a href='logoff.php'>Se déconnecter</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <div class="profil-container">
+            <h1>Modifier l'annonce</h1>
+            <form method="post">
+                <label for="titre">Titre :</label>
+                <input type="text" id="titre" name="titre" value="<?= htmlspecialchars($annonce['titre']) ?>" required><br>
 
-        <label for="etat">État :</label>
-        <select id="etat" name="etat" required>
-            <?php foreach ($etats as $et) : ?>
-                <option value="<?php echo htmlspecialchars($et['nom_etat']); ?>" <?php echo ($et['id_etat'] == $annonce['etat']) ? 'selected' : ''; ?>>
-                    <?php echo htmlspecialchars($et['nom_etat']); ?>
-                </option>
-            <?php endforeach; ?>
-        </select><br>
+                <label for="prix">Prix :</label>
+                <input type="number" id="prix" name="prix" value="<?= htmlspecialchars($annonce['prix']) ?>" required><br>
 
-        <label for="description">Description :</label>
-        <textarea id="description" name="description" required><?php echo htmlspecialchars($annonce['description']); ?></textarea><br>
+                <label for="categorie">Catégorie :</label>
+                <select id="categorie" name="categorie" required>
+                    <?php foreach ($categories as $cat) : ?>
+                        <option value="<?= htmlspecialchars($cat['nom_categorie']) ?>" <?= ($cat['nom_categorie'] == $annonce['categorie']) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($cat['nom_categorie']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select><br>
 
-        <button type="submit">Mettre à jour</button>
-    </form>
+                <label for="etat">État :</label>
+                <select id="etat" name="etat" required>
+                    <?php foreach ($etats as $et) : ?>
+                        <option value="<?= htmlspecialchars($et['nom_etat']) ?>" <?= ($et['nom_etat'] == $annonce['etat']) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($et['nom_etat']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select><br>
+
+                <label for="description">Description :</label>
+                <textarea id="description" name="description" required><?= htmlspecialchars($annonce['description']) ?></textarea><br>
+
+                <button type="submit">Mettre à jour</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

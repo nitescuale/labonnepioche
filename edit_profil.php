@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier Profil - La Bonne Pioche</title>
     <link rel="stylesheet" href="accueil.css">
-    <link rel="stylesheet" href="profil.css">
+    <link rel="stylesheet" href="edit_profil.css">
 </head>
 <body>
     <header>

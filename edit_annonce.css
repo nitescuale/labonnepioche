@@ -1,0 +1,187 @@
+/* Réinitialisation et styles globaux */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-image: url(back-ground.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #333;
+}
+
+/* Styles pour le header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, #6a92d4, #a7c7e7);
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+    font-size: 18px;
+}
+
+header a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+header a img {
+    height: 100%;
+    width: auto;
+    margin-right: 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin: 0 20px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 5px 10px;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.search-bar input::placeholder {
+    color: #999;
+}
+
+.search-bar button {
+    background-color: #5a82d1;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #4169e1;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.publish-button {
+    background-color: #ff6347;
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.publish-button:hover {
+    background-color: #ff4500;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.menu {
+    margin-top: 2%;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 200px;
+    background-color: #a7bde4;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.menu a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.menu a:hover {
+    background-color: #6a92d4;
+    color: white;
+}
+
+.content {
+    padding-top: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px); /* Ajuste la hauteur du contenu pour qu'il soit centré verticalement */
+}
+
+.profil-container {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+}
+
+.profil-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4a90e2;
+}
+
+.profil-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profil-container label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.profil-container input, .profil-container select, .profil-container textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.profil-container button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profil-container button:hover {
+    background-color: #357abd;
+}
