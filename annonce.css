@@ -171,29 +171,43 @@ header a img {
   overflow: hidden;
 }
 
-.slider-container img {
-  width: 100%;
+.slider {
+  position: relative;
   height: 100%;
-  object-fit: cover;
 }
 
-.slider-container input[type="radio"] {
+.slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+input[type="radio"] {
   display: none;
 }
 
-.slide-img {
-  display: none;
+.controls {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transition: opacity 0.5s ease-in-out;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
 }
 
-input[type="radio"]:checked + .slide-img {
-  display: block;
-  opacity: 1;
+.control {
+  border: 2px solid #fff;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0 5px;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .details h2 {
