@@ -17,7 +17,7 @@ body {
 
 /* Styles pour le container de profil */
 .profil-container {
-  margin: 120px auto; /* Centre le conteneur et ajoute de l'espace en haut */
+  margin: 12px auto; /* Centre le conteneur et ajoute de l'espace en haut */
   padding: 20px;
   background: rgba(255, 255, 255, 0.9); /* Fond blanc semi-transparent */
   border-radius: 10px;

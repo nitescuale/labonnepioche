@@ -49,10 +49,10 @@ header a img {
   align-items: center;
   flex-grow: 1;
   margin: 0 20px;
-  background: #fff; /* Fond blanc */
-  border-radius: 20px; /* Bordures arrondies */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombre */
-  padding: 5px 10px; /* Espacement intérieur */
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
 }
 
 .search-bar input {
@@ -65,7 +65,7 @@ header a img {
 }
 
 .search-bar input::placeholder {
-  color: #999; /* Couleur du placeholder */
+  color: #999;
 }
 
 .search-bar button {
