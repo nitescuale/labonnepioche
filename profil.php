@@ -34,7 +34,7 @@
             <?php
             $categories = fetchCategories($bdd);
             foreach ($categories as $category): ?>
-                <li><a href="accueil.php?categorie=<?= $category['nom_categorie'] ?>"><?= $category['nom_categorie'] ?></a></li>
+                <li><a href="accueil.php?categorie=<?= htmlspecialchars($category['nom_categorie']) ?>"><?= htmlspecialchars($category['nom_categorie']) ?></a></li>
             <?php endforeach; ?>
         </ul>
         <div class="search-bar">
@@ -44,7 +44,7 @@
         <div class="header-buttons">
             <a href="post_ad.php" class="publish-button">Publier une annonce</a>
             <div class='menu-dropdown'>
-                <img id='dropdown-icon' src='<?= $user['url_photo_profil'] ?>' alt='Icône utilisateur'>
+                <img id='dropdown-icon' src='<?= htmlspecialchars($user['url_photo_profil']) ?>' alt='Icône utilisateur'>
                 <div class='dropdown-content'>
                     <a href='profil.php'>Mon profil</a>
                     <a href='mes_favoris.php'>Mes favoris</a>
@@ -60,10 +60,10 @@
         <div class="profil-container">
             <h1>Mon Profil</h1>
             <div class="profil-details">
-                <img src="<?= $user['url_photo_profil'] ?>" alt="Photo de profil">
-                <p><strong>Nom :</strong> <?= $user['nom'] ?></p>
-                <p><strong>Prénom :</strong> <?= $user['prenom'] ?></p>
-                <p><strong>Email :</strong> <?= $user['email'] ?></p>
+                <img src="<?= htmlspecialchars($user['url_photo_profil']) ?>" alt="Photo de profil">
+                <p><strong>Nom :</strong> <?= htmlspecialchars($user['nom']) ?></p>
+                <p><strong>Prénom :</strong> <?= htmlspecialchars($user['prenom']) ?></p>
+                <p><strong>Email :</strong> <?= htmlspecialchars($user['email']) ?></p>
                 <a href="edit_profil.php" class="edit-button">Modifier mon profil</a>
             </div>
         </div>
@@ -73,7 +73,7 @@
         function performSearch() {
             var searchText = document.getElementById('search-input').value;
             searchText = capitalizeFirstLetter(searchText.toLowerCase());
-            window.location.href = 'http://localhost/labonnepioche/accueil.php?search=' + searchText;
+            window.location.href = 'http://localhost/labonnepioche/accueil.php?search=' + encodeURIComponent(searchText);
         }
 
         function capitalizeFirstLetter(text) {
