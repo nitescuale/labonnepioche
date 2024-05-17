@@ -83,6 +83,7 @@
                         echo '<p class="etat">' . $etat . '</p>';
                         echo '<p class="prix">' . $prix . ' € </p>';
                         echo '</div>';
+                        echo '<a href="edit_annonce.php?id_annonce=' . $id_annonce . '" class="edit-button">Modifier</a>';
                     echo '</div>';
                 echo '</div>';
             echo '</div>';
