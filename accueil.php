@@ -46,7 +46,7 @@ require_once 'db_config.php'; // Connexion à la bdd
                 echo "<img id='dropdown-icon' src='$url_photo_profil' alt='Icône utilisateur' class='login-logo'>";
                 echo "<ul class='dropdown-content' id='dropdown-content'>";
                 echo "<li><a href='profil.php'>Mon profil</a></li>";
-                echo "<li><a href='favoris.php'>Mes favoris</a></li>";
+                echo "<li><a href='mes_favoris.php'>Mes favoris</a></li>";
                 echo "<li><a href='mes_annonces.php'>Mes annonces</a></li>";
                 echo "<li><a href='transactions.php'>Mes transactions</a></li>";
                 echo "<li><a href='logoff.php'>Se déconnecter</a></li>";
