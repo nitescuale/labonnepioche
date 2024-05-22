@@ -9,7 +9,6 @@ require_once 'db_config.php'; // Connexion à la bdd
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes favoris</title>
-    <link rel="stylesheet" href="accueil.css">
     <link rel="stylesheet" href="mes_favoris.css">
 </head>
 <body>
@@ -91,4 +90,18 @@ require_once 'db_config.php'; // Connexion à la bdd
         function performSearch() {
             var searchText = document.getElementById('search-input').value;
             searchText = capitalizeFirstLetter(searchText.toLowerCase());
-            window
+            window.location.href = 'http://localhost/labonnepioche/accueil.php?search=' + searchText;
+        }
+
+        function capitalizeFirstLetter(text) {
+            return text.charAt(0).toUpperCase() + text.slice(1);
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+    </script>
+</body>
+</html>

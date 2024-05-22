@@ -9,7 +9,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes annonces</title>
-    <link rel="stylesheet" href="accueil.css">
     <link rel="stylesheet" href="mes_annonces.css">
 </head>
 <body>

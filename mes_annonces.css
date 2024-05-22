@@ -140,6 +140,7 @@ header a img {
   text-decoration: none;
   display: block;
   border-radius: 4px;
+  list-style: none; /* Supprime les points noirs */
 }
 
 .dropdown-content a:hover {
@@ -151,8 +152,8 @@ header a img {
 .annonces-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 100px;
+  justify-content: center; /* Centrer les annonces */
+  margin-top: 12px; /* Ajustement pour positionner les annonces plus haut */
 }
 
 .annonces-wrapper {
@@ -192,8 +193,29 @@ header a img {
 }
 
 .titre {
-  margin-top: 120px;
+  margin-top: 100px;
   text-align: center;
-  font-size: 24px;
+  font-size: 28px; /* Augmenter la taille de la police */
+  font-family: 'Arial Black', sans-serif; /* Changer la police */
   color: #333;
+}
+
+/* Bouton Modifier */
+.edit-button {
+  display: block;
+  width: fit-content;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: #5a82d1;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #4169e1;
+  transform: translateY(-2px);
 }

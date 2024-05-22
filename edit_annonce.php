@@ -63,9 +63,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $etat_query->execute(array($etat));
     $etat_result = $etat_query->fetch();
 
-    // Mettre à jour l'annonce avec les IDs correspondants
-    $update = $bdd->prepare('UPDATE annonces SET titre = ?, prix = ?, categorie = ?, etat = ?, description = ? WHERE id_annonce = ?');
-    $update->execute(array($titre, $prix, $cat_result['nom_categorie'], $etat_result['nom_etat'], $description, $id_annonce));
+    // Handling the image upload
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
+        $fileName = $_FILES["image"]["name"];
+        $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+        $targetDir = "./uploads/";
+        $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+
+        // Check if the uploads directory exists, if not create it
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+
+        if (in_array(strtolower($fileExtension), $allowedExtensions)) {
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                $url_photo = 'http://localhost/labonnepioche/uploads/' . basename($_FILES["image"]["name"]);
+
+                // Vérifier si une image existe déjà pour cette annonce
+                $photo_check_query = $bdd->prepare('SELECT * FROM photos_annonces WHERE id_annonce = ?');
+                $photo_check_query->execute(array($id_annonce));
+                $existing_photo = $photo_check_query->fetch();
+
+                if ($existing_photo) {
+                    // Mettre à jour l'image existante
+                    $update_photo_query = $bdd->prepare('UPDATE photos_annonces SET url_photo = ? WHERE id_annonce = ?');
+                    $update_photo_query->execute(array($url_photo, $id_annonce));
+                } else {
+                    // Ajouter une nouvelle image
+                    $insert_photo_query = $bdd->prepare('INSERT INTO photos_annonces (id_annonce, url_photo) VALUES (?, ?)');
+                    $insert_photo_query->execute(array($id_annonce, $url_photo));
+                }
+
+                // Mettre à jour l'annonce avec la nouvelle image
+                $update = $bdd->prepare('UPDATE annonces SET titre = ?, prix = ?, categorie = ?, etat = ?, description = ? WHERE id_annonce = ?');
+                $update->execute(array($titre, $prix, $cat_result['nom_categorie'], $etat_result['nom_etat'], $description, $id_annonce));
+            } else {
+                echo "Erreur lors du téléchargement de l'image.";
+                exit;
+            }
+        } else {
+            echo "Le format de l'image n'est pas autorisé.";
+            exit;
+        }
+    } else {
+        // Mettre à jour l'annonce sans changer l'image
+        $update = $bdd->prepare('UPDATE annonces SET titre = ?, prix = ?, categorie = ?, etat = ?, description = ? WHERE id_annonce = ?');
+        $update->execute(array($titre, $prix, $cat_result['nom_categorie'], $etat_result['nom_etat'], $description, $id_annonce));
+    }
 
     header('Location: mes_annonces.php');
     exit;
@@ -113,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="content">
         <div class="profil-container">
             <h1>Modifier l'annonce</h1>
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <label for="titre">Titre :</label>
                 <input type="text" id="titre" name="titre" value="<?= htmlspecialchars($annonce['titre']) ?>" required><br>
 
@@ -140,6 +185,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <label for="description">Description :</label>
                 <textarea id="description" name="description" required><?= htmlspecialchars($annonce['description']) ?></textarea><br>
+
+                <label for="image">Image :</label>
+                <input type="file" id="image" name="image"><br>
 
                 <button type="submit">Mettre à jour</button>
             </form>
