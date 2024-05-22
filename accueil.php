@@ -66,6 +66,7 @@
             $query = $bdd->prepare('SELECT a.id_annonce, a.titre, a.prix, a.description, a.categorie, a.etat, p.url_photo 
                 FROM annonces AS a
                 LEFT JOIN photos_annonces AS p ON a.id_annonce = p.id_annonce
+                WHERE a.vendu = 0
                 GROUP BY a.id_annonce');
             $query->execute();
 
