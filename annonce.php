@@ -6,6 +6,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="annonce.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
         <header> <!-- Entete -->
@@ -111,8 +112,12 @@
                                 echo '<p class="etat">' . $etat . '</p>';
                                 echo '<p class="prix">' . $prix . ' € </p>';
                                 echo '<form method="post">';
-                                echo '<input type="hidden" name="annonce_id" value="' . $id_annonce . '">';
+                                echo '<input type="hidden" name="id_annonce" value="' . $id_annonce . '">';
                                 echo '<input class="favoris-button" type="submit" name="add_to_favorites" value="Ajouter aux favoris">';
+                                echo '</form>';
+                                echo '<form method="post" action="process_transaction.php">';
+                                    echo '<input type="hidden" name="annonce_id" value="' . $id_annonce . '">';
+                                    echo '<button type="submit" name="buy_now">J\'achète</button>';
                                 echo '</form>';
                             echo '</div>'; // Fin de details
                         echo '</div>'; // Fin de annonce
@@ -144,6 +149,7 @@
             }
         }
         ?>
+
         <script>
             let slideIndex = 0;
             showSlides(slideIndex);
