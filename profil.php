@@ -49,7 +49,6 @@
                     <a href='profil.php'>Mon profil</a>
                     <a href='mes_favoris.php'>Mes favoris</a>
                     <a href='mes_annonces.php'>Mes annonces</a>
-                    <a href='mes_transactions.php'>Mes transactions</a>
                     <a href='logoff.php'>Se déconnecter</a>
                 </div>
             </div>

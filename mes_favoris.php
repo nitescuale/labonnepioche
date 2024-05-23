@@ -38,7 +38,6 @@ require_once 'db_config.php'; // Connexion à la bdd
                 echo "<a href='profil.php'>Mon profil</a>";
                 echo "<a href='mes_favoris.php'>Mes favoris</a>";
                 echo "<a href='mes_annonces.php'>Mes annonces</a>";
-                echo "<a href='mes_transactions.php'>Mes transactions</a>";
                 echo "<a href='logoff.php'>Se déconnecter</a>";
                 echo "</div>";
                 echo "</div>";

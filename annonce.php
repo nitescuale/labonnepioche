@@ -34,7 +34,6 @@
                     echo "<li><a href='profil.php'>Mon profil</a></li>";
                     echo "<li><a href='favoris.php'>Mes favoris</a></li>";
                     echo "<li><a href='mes_annonces.php'>Mes annonces</a></li>";
-                    echo "<li><a href='transactions.php'>Mes transactions</a></li>";
                     echo "<li><a href='logoff.php'>Se déconnecter</a></li>";
                     echo "</ul>";
                     echo "</div>";
