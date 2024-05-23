@@ -116,7 +116,7 @@
                                 echo '<input class="favoris-button" type="submit" name="add_to_favorites" value="Ajouter aux favoris">';
                                 echo '</form>';
                                 echo '<form method="post" action="process_transaction.php">';
-                                    echo '<input type="hidden" name="annonce_id" value="' . $id_annonce . '">';
+                                    echo '<input type="hidden" name="id_annonce" value="' . $id_annonce . '">';
                                     echo '<button type="submit" name="buy_now">J\'achète</button>';
                                 echo '</form>';
                             echo '</div>'; // Fin de details

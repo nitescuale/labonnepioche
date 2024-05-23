@@ -56,7 +56,7 @@
     <div class="annonces-container">
         <?php
         // Récupérez les annonces et les photos correspondantes à l'utilisateur connecté depuis la base de données
-        $check = $bdd->prepare('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, p.url_photo
+        $check = $bdd->prepare('SELECT a.id_annonce, a.titre, a.prix, a.categorie, a.etat, a.vendu, p.url_photo
                             FROM annonces a
                             JOIN utilisateurs u ON u.id_utilisateur = a.id_utilisateur
                             LEFT JOIN photos_annonces AS p ON a.id_annonce = p.id_annonce
@@ -72,17 +72,26 @@
             $categorie = $row['categorie'];
             $etat = $row['etat'];
             $url_photo = $row['url_photo'];
+            $vendu = $row['vendu'];
 
             echo '<div class="annonces-container">';
                 echo '<div class="annonces-wrapper">';
                     echo '<div class="annonce">';
                         echo '<img src="' . $url_photo . '" alt="' . $titre . '">';
                         echo '<div class="details">';
-                        echo '<h2><a class="lien-annonce" href="annonce.php?annonce=' . $id_annonce . '">' . $titre . '</a></h2>';
-                        echo '<p class="etat">' . $etat . '</p>';
-                        echo '<p class="prix">' . $prix . ' € </p>';
+                            echo '<h2><a class="lien-annonce" href="annonce.php?annonce=' . $id_annonce . '">' . $titre . '</a></h2>';
+                            echo '<p class="etat">' . $etat . '</p>';
+                            echo '<p class="prix">' . $prix . ' € </p>';
                         echo '</div>';
                         echo '<a href="edit_annonce.php?id_annonce=' . $id_annonce . '" class="edit-button">Modifier</a>';
+                        if ($vendu == 0) {
+                            echo '<form method="POST" action="mark_as_sold.php">';
+                                echo '<input type="hidden" name="annonce_id" value="' . htmlspecialchars($id_annonce) . '">';
+                                echo '<button type="submit">Marquer comme vendue</button>';
+                            echo '</form>';
+                        } else {
+                            echo '<p>Cette annonce est vendue</p>';
+                        }
                     echo '</div>';
                 echo '</div>';
             echo '</div>';
