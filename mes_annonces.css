@@ -197,7 +197,7 @@ header a img {
   text-align: center;
   font-size: 28px; /* Augmenter la taille de la police */
   font-family: 'Arial Black', sans-serif; /* Changer la police */
-  color: #333;
+  color: #5a82d1;
 }
 
 /* Bouton Modifier */
@@ -217,5 +217,30 @@ header a img {
 
 .edit-button:hover {
   background-color: #4169e1;
+  transform: translateY(-2px);
+}
+
+/* Bouton Marquer comme vendue */
+.annonce .mark-sold-button {
+  display: block;
+  width: fit-content;
+  margin: 10px auto;
+  padding: 12px 24px;
+  background-color: #ff6347;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.annonce .mark-sold-button:hover {
+  background-color: #e5533d;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   transform: translateY(-2px);
 }

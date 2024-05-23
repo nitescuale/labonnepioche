@@ -213,7 +213,7 @@ header a img {
   cursor: pointer;
   margin-top: 15px; /* Ajouter un espacement au-dessus du bouton */
   border-radius: 30px; /* Bordure arrondie */
-  font-size: 16px; /* Augmenter la taille de la police */
+  font-size: 14px; /* Augmenter la taille de la police */
   font-weight: bold; /* Rendre le texte en gras */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajouter une ombre */
   transition: all 0.3s ease; /* Transition pour les effets de survol */
@@ -310,4 +310,23 @@ header a img {
 .dropdown-content a:hover {
   background-color: #6a92d4;
   color: white;
+}
+.annonce .details button {
+  background-color: #4258e8; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  border: none; /* Supprime la bordure */
+  padding: 12px 24px; /* Ajuste le padding */
+  cursor: pointer; /* Change le curseur au survol */
+  margin-top: 15px; /* Espacement au-dessus du bouton */
+  border-radius: 30px; /* Bordures arrondies */
+  font-size: 12px; /* Taille de la police */
+  font-weight: bold; /* Texte en gras */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
+  transition: all 0.3s ease; /* Transition pour les effets de survol */
+}
+
+.annonce .details button:hover {
+  background-color: #5b99ef; /* Couleur de fond au survol */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre au survol */
+  transform: translateY(-2px); /* Translation légère au survol */
 }

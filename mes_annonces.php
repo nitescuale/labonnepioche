@@ -86,7 +86,7 @@
                         if ($vendu == 0) {
                             echo '<form method="POST" action="mark_as_sold.php">';
                                 echo '<input type="hidden" name="annonce_id" value="' . htmlspecialchars($id_annonce) . '">';
-                                echo '<button type="submit">Marquer comme vendue</button>';
+                                echo '<button type="submit" class="mark-sold-button">Marquer comme vendue</button>';
                             echo '</form>';
                         } else {
                             echo '<p>Cette annonce est vendue</p>';
