@@ -24,7 +24,7 @@
             if(filter_var($email, FILTER_VALIDATE_EMAIL))
             {
                 // Si le mot de passe est le bon
-                if($hash_password = $data['password'])
+                if($hash_password == $data['password'])
                 {
                     // On crée la session et on redirige à l'accueil.php
                     $_SESSION['user'] = $data['token'];
